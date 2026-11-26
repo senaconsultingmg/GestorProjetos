@@ -118,6 +118,7 @@ Cada módulo abaixo corresponde a uma aba do protótipo. As regras são as valid
 - **Bloqueio de item:** quem tem `orc_edit` bloqueia um item com justificativa. O texto aparece como "Observação para o usuário" no aviso do item, e o lançamento nele fica impedido.
 - **Trava de mês:** quem tem `trava` fecha e reabre meses; mês travado não aceita lançamento nem alteração.
 - **Remanejamento** entre verbas é solicitado no lançamento e aprovado por quem tem `rem_aprova`.
+- **Documento a anexar no item:** ao criar um item de custo, quem cria pode indicar o nome do documento a ser anexado nos lançamentos dele (por exemplo contrato ou termo de recebimento) e se ele é obrigatório. Se for obrigatório, o lançamento não é enviado sem ele; se for opcional, o tipo aparece na lista de anexos do lançamento.
 - A planilha pode ser ampliada em tela cheia.
 
 ### 4.4 Lançamentos e cotações
@@ -152,7 +153,7 @@ Cada módulo abaixo corresponde a uma aba do protótipo. As regras são as valid
 
 ### 4.8 Arquivos e armazenamento
 
-- **Nome padrão:** todo arquivo salvo recebe `<nº do processo>_<ddmmaaaaHHMM>_<nome original>` (por exemplo `2026-004512_251120261412_nota.pdf`). Se o projeto não tiver nº de processo, usa o código do projeto.
+- **Nome padrão:** todo arquivo salvo recebe `<nº do processo>_<ddmmaaaaHHMM>_<nome original>` (por exemplo `004512_251120261412_nota.pdf`). O número do processo entra sem o ano na frente (2026/004512 vira 004512), porque a data completa vem logo depois; se o projeto não tiver nº de processo, usa o código do projeto. O nome inteiro tem no máximo 80 caracteres: o trecho do nome original é cortado, preservando a extensão, e acentos e caracteres especiais são trocados por letras simples e sublinhado.
 - **Imagens:** o navegador reduz para no máximo 1600 px no lado maior, JPEG com qualidade 75%, **mantendo os metadados (EXIF)**.
 - **PDFs e outros arquivos** não são barrados por tamanho; o usuário não precisa fazer nada. A otimização de PDF grande, se necessária, é feita no servidor.
 - **Destinos:** a tela de Administração cadastra vários destinos dos tipos Supabase Storage, Google Drive e bucket S3-compatível, cada um com seus parâmetros e modelo de pastas (`{processo}`, `{ano}`, `{mes}`, `{ano-mes}`, `{verba}`, `{item}`, `{acao}`).
@@ -178,7 +179,7 @@ Tabelas relacionais no PostgreSQL, com chave primária `id` (uuid), `criado_em`,
 | Plano | `acoes` | codigo, nome, tipo | projetos |
 | Plano | `metas` | nome, indicador, alvo | ações |
 | Orçamento | `verbas` | nome, tipo (custo ou receita) | projetos |
-| Orçamento | `itens_orcamento` | nome, recorrência, valor, mês inicial e final, conta, centro de custo, exige cotação, modo de rendimento (somar ou reservar), bloqueio (quando, quem, justificativa) | verbas |
+| Orçamento | `itens_orcamento` | nome, recorrência, valor, mês inicial e final, conta, centro de custo, exige cotação, documento a anexar (nome e se é obrigatório), modo de rendimento (somar ou reservar), bloqueio (quando, quem, justificativa) | verbas |
 | Orçamento | `item_valores_mes` | item_id, mês, valor orçado | itens |
 | Orçamento | `meses_travados` | projeto_id, mês, travado_por, quando | projetos |
 | Orçamento | `remanejamentos` | verba origem, verba destino, valor, situação, aprovado_por | verbas |
