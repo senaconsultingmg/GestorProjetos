@@ -118,7 +118,7 @@ Cada módulo abaixo corresponde a uma aba do protótipo. As regras são as valid
 - **Bloqueio de item:** quem tem `orc_edit` bloqueia um item com justificativa. O texto aparece como "Observação para o usuário" no aviso do item, e o lançamento nele fica impedido.
 - **Trava de mês:** quem tem `trava` fecha e reabre meses; mês travado não aceita lançamento nem alteração.
 - **Remanejamento** entre verbas é solicitado no lançamento e aprovado por quem tem `rem_aprova`.
-- **Documento a anexar no item:** ao criar um item de custo, quem cria pode indicar o nome do documento a ser anexado nos lançamentos dele (por exemplo contrato ou termo de recebimento) e se ele é obrigatório. Se for obrigatório, o lançamento não é enviado sem ele; se for opcional, o tipo aparece na lista de anexos do lançamento.
+- **Documento a anexar no item:** ao criar um item de custo, quem cria escolhe quais documentos entram nos lançamentos dele e quais são obrigatórios. Os padrão são Nota fiscal / recibo, Comprovante de pagamento e Foto (sugestão inicial: NF e comprovante obrigatórios, foto opcional), e é possível acrescentar outros, como contrato ou termo de recebimento. O lançamento só é enviado com os obrigatórios anexados; os opcionais aparecem na lista de anexos mas não bloqueiam. Itens antigos, sem escolha, seguem a regra anterior (NF e comprovante obrigatórios; foto obrigatória só nas verbas que a exigem).
 - A planilha pode ser ampliada em tela cheia.
 
 ### 4.4 Lançamentos e cotações
@@ -179,7 +179,7 @@ Tabelas relacionais no PostgreSQL, com chave primária `id` (uuid), `criado_em`,
 | Plano | `acoes` | codigo, nome, tipo | projetos |
 | Plano | `metas` | nome, indicador, alvo | ações |
 | Orçamento | `verbas` | nome, tipo (custo ou receita) | projetos |
-| Orçamento | `itens_orcamento` | nome, recorrência, valor, mês inicial e final, conta, centro de custo, exige cotação, documento a anexar (nome e se é obrigatório), modo de rendimento (somar ou reservar), bloqueio (quando, quem, justificativa) | verbas |
+| Orçamento | `itens_orcamento` | nome, recorrência, valor, mês inicial e final, conta, centro de custo, exige cotação, documentos a anexar (lista; cada um obrigatório ou opcional), modo de rendimento (somar ou reservar), bloqueio (quando, quem, justificativa) | verbas |
 | Orçamento | `item_valores_mes` | item_id, mês, valor orçado | itens |
 | Orçamento | `meses_travados` | projeto_id, mês, travado_por, quando | projetos |
 | Orçamento | `remanejamentos` | verba origem, verba destino, valor, situação, aprovado_por | verbas |
