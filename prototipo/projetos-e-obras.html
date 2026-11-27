@@ -1031,9 +1031,12 @@ function docsLer(){
 }
 function ftSync(i,v){const s=$('#ft');if(!s)return;const ds=docsItem(i.id,v&&v.id),cur=s.value;s.innerHTML=ds.map(d=>'<option value="'+d.k+'">'+esc(d.nome)+(d.obrig?' (obrigatório)':' (opcional)')+'</option>').join('')||'<option value="nf">Documento</option>';if(cur&&s.querySelector('option[value="'+cur+'"]'))s.value=cur;fileList()}
 /* ---------- ações ---------- */
+const STG={fi:'ft',di:'dt',pcf:'pct',pdi:'pdt',pfi:'pff'};
+function stageShow(t){const old=document.getElementById('stg-'+t.id);if(old)old.remove();if(!t.files.length)return;const nm=[...t.files].map(f=>esc(f.name)).join(', ');const d=document.createElement('div');d.id='stg-'+t.id;d.className='row';d.style.cssText='margin-top:6px;gap:6px;align-items:center';d.innerHTML='<span class="small muted" style="flex:1">📎 '+t.files.length+' arquivo(s) selecionado(s): '+nm+'. Confira a categoria e clique em Enviar.</span><button class="btn p" type="button" data-a="arq-enviar" data-id="'+t.id+'">Enviar</button><button class="btn" type="button" data-a="arq-cancel" data-id="'+t.id+'">Cancelar</button>';t.closest('.row').insertAdjacentElement('afterend',d)}
 function lancSalvar(modo){
  const o={v:$('#lv1').value,i:$('#li').value,tipo:$('#lt').value,data:$('#ld').value,desc:$('#ls').value.trim(),forn:$('#lf').value,valor:parseFloat($('#lv').value)||0,conta:contaDe(itemDe($('#li').value),verbaDe($('#lv1').value)),cc:ccDe(itemDe($('#li').value),verbaDe($('#lv1').value))};
  if(bloqI(o.i)&&!(M.id)){$('#le').innerHTML=errs(['Este item está bloqueado e não aceita lançamentos.']);return}
+ if($('#fi')&&$('#fi').files.length){$('#le').innerHTML=errs(['Há arquivo selecionado que ainda não foi enviado. Escolha a categoria e clique em “Enviar” (ou cancele a seleção).']);return}
  const docs={nf:0,comp:0,foto:0};M.arq.forEach(x=>docs[x.t]=1);
  const tmp=Object.assign({},o,{docs}),er=[];let rem=false;
  let cot=null;
@@ -1231,6 +1234,8 @@ document.addEventListener('click',e=>{
   case'lanc-novo':lancForm(null,id);break;
   case'lanc-edit':lancForm(D.lanc.find(x=>x.id===id));break;
   case'lanc-salvar':lancSalvar(id);break;
+  case'arq-enviar':{const i=document.getElementById(id);if(i&&i.files&&i.files.length){i._go=true;i.dispatchEvent(new Event('change',{bubbles:true}));i._go=false}const w=document.getElementById('stg-'+id);if(w)w.remove();break}
+  case'arq-cancel':{const i=document.getElementById(id);if(i)i.value='';const w=document.getElementById('stg-'+id);if(w)w.remove();break}
   case'rm-arq':M.arq.splice(+id,1);fileList();lancLive();break;
   case'aval':{modal('Avaliar prestador','<label class="f" for="av">Nota de 1 a 5</label><select id="av"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>','<button class="btn" data-a="fechar">Cancelar</button><button class="btn p" data-a="aval-ok" data-id="'+id+'">Salvar</button>');break}
   case'aval-ok':{D.lanc.find(x=>x.id===id).aval=+$('#av').value;fechar();toast('Avaliação registrada.');render();break}
@@ -1281,8 +1286,9 @@ document.addEventListener('click',e=>{
  }
 });
 function mostra(tx){modal('Texto do relatório','<textarea rows="14" readonly style="font-family:monospace;font-size:12px">'+esc(tx)+'</textarea>','<button class="btn" data-a="fechar">Fechar</button>')}
-document.addEventListener('change',e=>{if(e.target.type==='file'&&e.target.files&&e.target.files.length)setTimeout(()=>procArqs(e.target.files),30);if(e.target.classList&&e.target.classList.contains('tal'))turmaForm.vg();
+document.addEventListener('change',e=>{if(e.target.type==='file'&&e.target.files&&e.target.files.length&&!e.target._go)setTimeout(()=>procArqs(e.target.files),30);if(e.target.classList&&e.target.classList.contains('tal'))turmaForm.vg();
  const t=e.target;
+ if(t.type==='file'&&STG[t.id]&&!t._go){stageShow(t);return}
  if(t.id==='role'){S.role=t.value;const u=userAtual();if(S.view==='acessos'&&!has('acessos_admin'))S.view='lista';if(S.view==='proj'&&u.projetos!=='todos'&&!u.projetos.includes(D.id))S.view='lista';render();return}
  if(t.classList&&t.classList.contains('idu')){const o=t.closest('.idr').querySelector('.ido');o.disabled=!t.checked;if(!t.checked)o.checked=false;return}
  if(t.id==='dtp'){$('#dcm').innerHTML=destForm.campos(t.value);return}

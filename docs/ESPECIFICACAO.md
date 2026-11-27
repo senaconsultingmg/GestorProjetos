@@ -159,6 +159,8 @@ Cada módulo abaixo corresponde a uma aba do protótipo. As regras são as valid
 - **Destinos:** a tela de Administração cadastra vários destinos dos tipos Supabase Storage, Google Drive e bucket S3-compatível, cada um com seus parâmetros e modelo de pastas (`{processo}`, `{ano}`, `{mes}`, `{ano-mes}`, `{verba}`, `{item}`, `{acao}`).
 - Um destino só vira **principal** ou **cópia de segurança** depois de passar no teste de conexão. O arquivo grava o destino onde foi salvo; trocar o principal não move os antigos.
 - Chaves e senhas ficam só no servidor, nunca no navegador.
+- **Fluxo de anexo:** o usuário escolhe o(s) arquivo(s), confere a categoria e clica em **Enviar**; só então o arquivo entra na lista. Arquivo escolhido e não enviado impede salvar o lançamento (aviso na tela). Vale para lançamentos, documentos do projeto, plano de trabalho e patrimônio.
+- **Abrir e baixar:** no sistema real o arquivo fica no destino configurado e é aberto por link assinado de curta duração, gerado no servidor após conferir a permissão do usuário. PDF e imagem abrem no próprio navegador; há botão de baixar. No protótipo só o nome é guardado.
 - **ZIP de comprovantes:** gerado no servidor, por período e verba, com pastas por verba e item e um índice (planilha) que liga cada arquivo ao lançamento.
 
 ## 5. Modelo de dados
