@@ -151,6 +151,15 @@ Cada módulo abaixo corresponde a uma aba do protótipo. As regras são as valid
 - **Patrimônio:** bens comprados com recursos do projeto (descrição, valor, data, local, estado), com detalhe e baixa. O cadastro de bens é o do módulo Ativos do portal, com vínculo ao projeto; a tabela `bens` do modelo vira esse vínculo.
 - **Encerramento:** confere pendências, registra o destino dos bens e do saldo e bloqueia o projeto.
 
+### 4.7a Layout da interface
+
+- **Barra lateral escura** com ícones, fixa à esquerda: Projetos; dentro de um projeto, as telas agrupadas em Gestão, Execução e Controle (com contadores de pendência); Administração para quem tem permissão. No celular ela vira menu que abre e fecha.
+- **Topo** com busca (projetos, telas do projeto e administração) e o usuário com a troca de perfil ("Ver como", só no protótipo).
+- **Cabeçalho da página** com trilha de navegação (Projetos / projeto / tela), título e dados do projeto.
+- **Etapas do projeto** como linha do tempo com círculos numerados.
+- **Painel de resumo** à direita nas telas largas (parceiro, instrumento, etapa, período, versão, lançamentos); some no Orçamento para dar espaço à planilha.
+- Inspirado em layout de referência do Portal Tripolo (barra lateral, cartões, resumo lateral), adaptado às telas deste módulo.
+
 ### 4.8 Arquivos e armazenamento
 
 - **Nome padrão:** todo arquivo salvo recebe `<nº do processo>_<ddmmaaaaHHMM>_<nome original>` (por exemplo `004512_251120261412_nota.pdf`). O número do processo entra sem o ano na frente (2026/004512 vira 004512), porque a data completa vem logo depois; se o projeto não tiver nº de processo, usa o código do projeto. O nome inteiro tem no máximo 80 caracteres: o trecho do nome original é cortado, preservando a extensão, e acentos e caracteres especiais são trocados por letras simples e sublinhado.
