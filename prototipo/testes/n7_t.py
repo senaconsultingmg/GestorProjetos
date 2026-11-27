@@ -1,0 +1,36 @@
+from playwright.sync_api import sync_playwright
+errs=[]
+def T(pg,l):print(l,'|',pg.inner_text('#toast').replace('\n',' '))
+with sync_playwright() as p:
+    b=p.chromium.launch(); pg=b.new_page(viewport={'width':1300,'height':900})
+    pg.on('pageerror',lambda e:errs.append('PAGEERR '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
+    pg.goto('file:///home/claude/proto/obras2.html')
+    pg.select_option('#role','coord'); pg.wait_for_timeout(100)
+    print('coord lista:',pg.inner_text('#app')[:400].replace('\n',' | '))
+    pg.click('button[data-a=pf][data-id=inativos]'); print('inativos:',pg.inner_text('#app')[:300].replace('\n',' | '))
+    pg.select_option('#role','assist'); print('assist:','Horta' in pg.inner_text('#app'))
+    pg.select_option('#role','dir'); pg.click('button[data-a=pf][data-id=inativos]'); pg.click('text=Horta Comunitária'); print('dir tabs:',pg.inner_text('.tabs').replace('\n',' '))
+    print(pg.inner_text('#app')[:200].replace('\n',' | '))
+    pg.select_option('#role','coord'); pg.click('.tabs >> text=Cadastro'); pg.wait_for_timeout(100)
+    t=pg.inner_text('#app'); print('Horta cad: inativo' , 'Projeto encerrado' in t, 'Histórico de alterações do cadastro' in t, 'Editar dados' in t)
+    pg.screenshot(path='/tmp/shots/n7a.png',full_page=True)
+    pg.click('button[data-a=lista]') if pg.locator('button[data-a=lista]').count() else None
+    pg.select_option('#role','coord'); pg.click('button[data-a=pf][data-id=ativos]'); pg.click('text=Escola de Futebol Bairro Esperança >> nth=0')
+    pg.click('.tabs >> text=Patrimônio'); print('pat:',pg.inner_text('#app')[:300].replace('\n',' | '))
+    pg.click('tr[data-a=pat-ver] >> nth=0'); print(pg.inner_text('.mb')[:500].replace('\n',' | ')); pg.click('button[data-a=fechar]')
+    pg.click('button[data-a=pat-novo]'); pg.click('button[data-a=pat-salvar]'); print('err:',pg.inner_text('#le'))
+    pg.fill('#pd','Mesa de reunião'); pg.fill('#pn2','PAT-9'); pg.fill('#pl','Sala 1'); pg.click('button[data-a=pat-salvar]'); T(pg,'novo')
+    pg.click('tr[data-a=pat-ver] >> nth=0'); pg.click('button[data-a=pat-rem]'); pg.fill('#rd2','Doado'); pg.fill('#rd3','Excesso'); pg.click('button[data-a=pat-rem-ok]'); print(pg.inner_text('.mb')[:400].replace('\n',' | ')); pg.click('button[data-a=fechar]')
+    # encerramento
+    pg.click('.tabs >> text=Cadastro'); pg.click('button[data-a=enc-ini]'); pg.click('button[data-a=enc-ini-ok]'); pg.wait_for_timeout(100)
+    print('tabs enc:',pg.inner_text('.tabs').replace('\n',' '))
+    print('btn fim disabled:',pg.locator('button[data-a=enc-fim]').is_disabled())
+    pg.click('button[data-a=enc-saldo]'); pg.set_input_files('#enr',{'name':'rel.pdf','mimeType':'application/pdf','buffer':b'x'}); pg.set_input_files('#ent',{'name':'termo.pdf','mimeType':'application/pdf','buffer':b'x'})
+    pg.click('button[data-a=enc-fim]'); pg.click('button[data-a=enc-fim-ok]'); T(pg,'fim')
+    print('lista ativa tem Escola:','Escola de Futebol' in pg.inner_text('#app'))
+    pg.click('button[data-a=pf][data-id=inativos]'); print(pg.inner_text('#app')[:300].replace('\n',' | '))
+    # novo projeto -> exec
+    pg.click('button[data-a=pf][data-id=ativos]'); pg.click('button[data-a=proj-novo]'); pg.fill('#pn','Teste'); pg.click('button[data-a=proj-criar]')
+    pg.click('button[data-a=rec-edit]'); print('exec fields in elab:',pg.locator('#r6e').count())
+    print('ERRS',errs)
+    b.close()

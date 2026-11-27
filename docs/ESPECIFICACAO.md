@@ -46,6 +46,18 @@ Decisões: **Supabase** hospeda banco, login e funções de servidor; o módulo 
 - **Arquivos:** nunca no banco. O banco guarda o caminho e o destino; o arquivo vai para o Storage, o Drive ou o bucket, conforme a tela de Administração.
 - **Funções de servidor:** envio aos destinos (as chaves ficam só aqui), geração de relatório em PDF, ZIP de comprovantes com índice e envio de avisos.
 
+### 2.1 Integração com o Portal Processos (cadastros compartilhados)
+
+O módulo **não recria** empresas, usuários, grupos, setores nem papéis: usa os do portal, para haver um só cadastro e um só login.
+
+- **Esquemas separados no mesmo banco:** `portal` (cadastros compartilhados, mantidos pelo portal) e `projetos` (tabelas do módulo, com chave estrangeira para o `portal`). O módulo lê o `portal` por visões (views) e nunca altera esses cadastros.
+- **Empresa:** todo projeto tem `empresa_id`; as regras de acesso por linha (RLS) filtram por empresa e por projeto. Isso substitui a decisão anterior de "uma só organização" caso o portal tenha várias empresas.
+- **Usuário:** vem do login do portal (`auth.users` + cadastro do portal). O módulo guarda só o que é dele: o vínculo usuário × projeto e o perfil dentro do módulo.
+- **Papéis, grupos e setores do portal → perfis do módulo:** o catálogo de funções (`funcoes`) e os perfis (`perfis`) continuam do módulo, porque são específicos de projetos. Uma tabela de equivalência liga cada **papel ou grupo do portal** a um perfil do módulo (ex.: papel "Financeiro" → perfil "Assistente de prestação de contas"). O usuário herda o perfil pelo papel; exceções individuais ficam registradas no log de permissões.
+- **Setor:** usado para sugerir responsável e para filtrar listas (ex.: o setor responsável pelo patrimônio), sem criar outro cadastro.
+- **Administração:** a tela Acessos do módulo passa a mostrar usuários do portal e permitir só o que é do módulo (perfil, projetos, funções); criar usuário, grupo ou setor continua no portal.
+- **Pendência:** confirmar com o esquema real do portal os nomes das tabelas e se existem papéis/grupos hierárquicos antes de escrever as migrações da fase 0.
+
 ## 3. Perfis e permissões
 
 O acesso é definido por **funções**. O administrador cria um perfil (cargo), marca as funções e vincula o perfil ao usuário, informando se ele vê todos os projetos ou só alguns. Nenhuma regra depende do nome do cargo: o código só pergunta se o usuário tem a função.
