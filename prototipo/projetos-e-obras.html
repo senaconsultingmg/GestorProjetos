@@ -178,22 +178,23 @@ const FUNC=[
 ['Plano de trabalho e orçamento',[['plano_edit','Cria ações e metas no plano de trabalho'],['orc_edit','Cria verbas de custos, itens de custos, tipos de receita e itens de receita; bloqueia itens'],['rem_aprova','Aprova remanejamento entre verbas'],['trava','Trava e destrava meses do orçamento'],['ver_valores','Vê valores (sem esta marca, os valores aparecem escondidos)']]],
 ['Lançamentos e prestação de contas',[['lanc','Lança despesas, solicita remanejamento e cadastra prestadores'],['rcb','Registra recebimentos de receitas'],['rend_info','Informa rendimentos financeiros'],['lanc_analisa','Analisa lançamentos e aprova a prestação de contas do mês'],['prest_enviar','Envia a prestação de contas do mês para análise'],['just_aprova','Aprova justificativas de falta de 3 orçamentos e avalia prestadores'],['pc_edit','Redige e envia a prestação de contas por ação'],['pc_ver','Abre a prestação de contas por ação (leitura e conferência)'],['rel_emite','Emite o relatório de execução das ações (por ação e período)']]],
 ['Calendário, alunos e acompanhamento',[['agenda','Cria e remarca aulas e eventos, registra presença e notas'],['aluno_gerir','Cadastra alunos, turmas, inscrições, saídas e transferências'],['dados_prot','Vê os dados protegidos dos alunos'],['log_acesso','Vê o registro de acessos aos dados protegidos'],['acomp_prof','Registra acompanhamento como professor'],['acomp_psi','Registra e vê o acompanhamento psicológico'],['acomp_ped','Registra acompanhamento como pedagogo'],['acomp_tudo','Vê todos os tipos de acompanhamento, inclusive o psicológico']]],
+['Equipe (staff)',[['staff_gerir','Cadastra, edita e desliga pessoas da equipe (staff)'],['staff_prest','Comprova salário e benefícios de cada pessoa por mês e envia a prestação da equipe'],['staff_analisa','Analisa, aprova ou devolve a prestação mensal da equipe']]],
 ['Auditoria e patrimônio',[['aud_emite','Emite relatórios de auditoria, abre divergências e as encerra'],['aud_resp','Responde divergências e registra correções'],['pat_edit','Cadastra e altera bens do patrimônio']]],
-['Abas que pode abrir',[['ver_resumo','Resumo'],['ver_cad','Cadastro'],['ver_plano','Plano de trabalho'],['ver_orc','Orçamento'],['ver_prest','Prestação de contas'],['ver_cal','Calendário'],['ver_alunos','Alunos'],['ver_acomp','Acompanhamento'],['ver_aud','Auditoria'],['ver_hist','Histórico'],['ver_pat','Patrimônio'],['ver_prov','Prestadores']]],
+['Abas que pode abrir',[['ver_resumo','Resumo'],['ver_cad','Cadastro'],['ver_plano','Plano de trabalho'],['ver_orc','Orçamento'],['ver_prest','Prestação de contas'],['ver_cal','Calendário'],['ver_alunos','Alunos'],['ver_acomp','Acompanhamento'],['ver_aud','Auditoria'],['ver_hist','Histórico'],['ver_pat','Patrimônio'],['ver_prov','Prestadores'],['ver_staff','Equipe (staff)']]],
 ['Administração',[['acessos_admin','Administra perfis e usuários (permissões)']]]];
-const VER=['ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_alunos','ver_acomp','ver_aud','ver_hist','ver_pat','ver_prov'];
-const COORDF=VER.concat(['proj_gerir','cad_edit','ver_inativos','plano_edit','orc_edit','trava','lanc','rcb','rend_info','agenda','aluno_gerir','acomp_tudo','dados_prot','log_acesso','aud_resp','pc_edit','pat_edit','ver_valores','just_aprova','rel_emite']);
+const VER=['ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_alunos','ver_acomp','ver_aud','ver_hist','ver_pat','ver_prov','ver_staff'];
+const COORDF=VER.concat(['proj_gerir','cad_edit','ver_inativos','plano_edit','orc_edit','trava','lanc','rcb','rend_info','agenda','aluno_gerir','acomp_tudo','dados_prot','log_acesso','aud_resp','pc_edit','pat_edit','ver_valores','just_aprova','rel_emite','staff_gerir','staff_prest']);
 const PERFIS=[
 {id:'coord',nome:'Coordenador de Projetos',funcs:COORDF},
-{id:'gestor',nome:'Gestor do contrato',funcs:VER.concat(['plano_edit','rem_aprova','just_aprova','lanc','rcb','agenda','aluno_gerir','aud_resp','pc_edit','pat_edit','dados_prot','ver_valores','rel_emite'])},
-{id:'assist',nome:'Assistente de prestação de contas',funcs:['ver_resumo','ver_plano','ver_orc','ver_prest','ver_pat','ver_prov','ver_cal','lanc','rcb','prest_enviar','aud_resp','pc_edit','pat_edit','ver_valores']},
-{id:'analista',nome:'Analista de prestação de contas',funcs:['ver_resumo','ver_plano','ver_orc','ver_prest','ver_aud','ver_hist','ver_pat','ver_prov','lanc_analisa','trava','aud_resp','pc_ver','ver_valores','rel_emite']},
-{id:'auditor',nome:'Auditor',funcs:['ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_alunos','ver_aud','ver_hist','ver_pat','ver_prov','aud_emite','log_acesso','pc_ver','ver_valores','rel_emite']},
+{id:'gestor',nome:'Gestor do contrato',funcs:VER.concat(['plano_edit','rem_aprova','just_aprova','lanc','rcb','agenda','aluno_gerir','aud_resp','pc_edit','pat_edit','dados_prot','ver_valores','rel_emite','staff_gerir'])},
+{id:'assist',nome:'Assistente de prestação de contas',funcs:['ver_staff','staff_prest','ver_resumo','ver_plano','ver_orc','ver_prest','ver_pat','ver_prov','ver_cal','lanc','rcb','prest_enviar','aud_resp','pc_edit','pat_edit','ver_valores']},
+{id:'analista',nome:'Analista de prestação de contas',funcs:['ver_staff','staff_analisa','ver_resumo','ver_plano','ver_orc','ver_prest','ver_aud','ver_hist','ver_pat','ver_prov','lanc_analisa','trava','aud_resp','pc_ver','ver_valores','rel_emite']},
+{id:'auditor',nome:'Auditor',funcs:['ver_staff','ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_alunos','ver_aud','ver_hist','ver_pat','ver_prov','aud_emite','log_acesso','pc_ver','ver_valores','rel_emite']},
 {id:'prof',nome:'Professor',funcs:['ver_plano','ver_cal','ver_alunos','ver_acomp','agenda','acomp_prof']},
 {id:'psi',nome:'Psicólogo',funcs:['ver_plano','ver_cal','ver_alunos','ver_acomp','acomp_psi']},
 {id:'ped',nome:'Pedagoga',funcs:['ver_plano','ver_cal','ver_alunos','ver_acomp','acomp_ped']},
 {id:'fin',nome:'Financeiro',funcs:['ver_orc','ver_hist','rend_info','ver_valores']},
-{id:'dir',nome:'Diretoria',funcs:['ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_aud','ver_hist','ver_pat','ver_inativos','ver_valores','rel_emite']},
+{id:'dir',nome:'Diretoria',funcs:['ver_staff','ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_aud','ver_hist','ver_pat','ver_inativos','ver_valores','rel_emite']},
 {id:'adm',nome:'Administrador',funcs:COORDF.concat(['acessos_admin'])}];
 const USUARIOS=Object.keys(ROLES).map(r=>({id:r,nome:ROLES[r][0],email:ROLES[r][0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ /g,'.')+'@instituto.org.br',perfil:r,projetos:'todos',ativo:true}));
 const ACLOG=[];
@@ -210,7 +211,7 @@ const SENHA='1234';
 const nomes=['Davi Souza','Miguel Santos','Arthur Oliveira','Heitor Lima','Gabriel Pereira','Samuel Costa','Lucas Ribeiro','Matheus Almeida','Pedro Carvalho','Enzo Gomes','Rafael Martins','Bernardo Rocha','Nicolas Barbosa','Guilherme Araújo','Felipe Nunes','João Vitor Dias','Caio Teixeira','Bruno Moreira','Thiago Cardoso','Vinícius Freitas','Kauã Ramos','Ryan Mendes','Théo Cavalcanti','Isaac Monteiro','Ana Clara Lopes','Maria Eduarda Pinto','Larissa Campos','Beatriz Farias'];
 const ruas=['Rua das Palmeiras','Rua Sete de Setembro','Av. Esperança','Rua do Campo','Travessa da Paz'];
 const CRIT0=()=>[{id:'acoes',nome:'Cumprimento das ações e metas',peso:30},{id:'orc',nome:'Execução do orçamento',peso:20},{id:'prest',nome:'Qualidade das prestações de contas',peso:20},{id:'alunos',nome:'Assiduidade e participação dos alunos',peso:20},{id:'prov',nome:'Qualidade dos prestadores',peso:10}];
-function mkVazio(nome){return{ativo:true,enc:null,bens:[],criterios:CRIT0(),id:'P'+Date.now()%100000,nome,etapa:'elab',pat:'',instr:'',codigos:[],tipo:'',respElab:'',docs:[],contas:[],cc:[],acoes:[],verbas:[],lanc:[],prest:{},cal:[],alunos:[],turmas:[],acomp:[],prov:[],div:[],nc:[],aud:[],minCot:500,rem:[],ini:'',fim:'',exIni:'',exFim:'',ver:1,vers:[{v:1,q:HOJE,quem:'Sistema',desc:'Versão inicial do projeto'}],log:[],trava:{},receitas:[],rcb:[],objetivo:'',
+function mkVazio(nome){return{ativo:true,enc:null,bens:[],criterios:CRIT0(),id:'P'+Date.now()%100000,nome,etapa:'elab',pat:'',instr:'',codigos:[],tipo:'',respElab:'',docs:[],contas:[],cc:[],acoes:[],verbas:[],lanc:[],prest:{},cal:[],alunos:[],turmas:[],acomp:[],prov:[],div:[],nc:[],aud:[],minCot:500,rem:[],staffMax:0,equipe:[],staffPC:{},staffMes:{},ini:'',fim:'',exIni:'',exFim:'',ver:1,vers:[{v:1,q:HOJE,quem:'Sistema',desc:'Versão inicial do projeto'}],log:[],trava:{},receitas:[],rcb:[],objetivo:'',
  vis:visPadrao([]),dadosAcesso:['coord','gestor'],logAcesso:[]}}
 function visPadrao(verbas){const v={};['coord','gestor','assist','analista','auditor','prof','psi','ped','fin','dir','adm'].forEach(r=>{const all=['coord','gestor','analista','auditor','fin','dir','adm'].includes(r),ver=all||r==='assist';v[r]={total:all,v:Object.fromEntries(verbas.map(x=>[x.id,ver])),};});return v}
 function mkProjeto1(){
@@ -320,6 +321,17 @@ function mkProjeto1(){
  {id:'PT2',desc:'Armário de aço para almoxarifado',local:'Salão da Associação',status:'Em estoque',num:'PAT-004513',lanc:'',dataAq:'2026-10-03',fotos:[{fase:'Aquisição',n:'armario.jpg'}],docs:[{t:'NF',n:'nf_armario.pdf'},{t:'Manual',n:'manual_armario.pdf'}],rem:null,hist:[{q:'2026-10-03',quem:'Carlos Dias (assistente)',campo:'Cadastro',ant:'—',dep:'Bem cadastrado'}]},
  {id:'PT3',desc:'Projetor multimídia',local:'Removido — devolvido ao parceiro',status:'Removido',num:'PAT-004498',lanc:'',dataAq:'2026-09-12',fotos:[{fase:'Aquisição',n:'projetor.jpg'},{fase:'Remoção',n:'projetor_devolucao.jpg'}],docs:[{t:'NF',n:'nf_projetor.pdf'}],rem:{data:'2026-11-08',destino:'Instituto Bola Cidadã (sede)',motivo:'Defeito de fábrica; trocado pelo parceiro.'},hist:[{q:'2026-09-12',quem:'Carlos Dias (assistente)',campo:'Cadastro',ant:'—',dep:'Bem cadastrado'},{q:'2026-11-08',quem:'Marcos Lima (gestor)',campo:'Status',ant:'Em uso',dep:'Removido → Instituto Bola Cidadã (sede), 08/11/2026'}]}];
 
+
+ P.staffMax=4;
+ P.equipe=[
+  {id:'E1',nome:'Juliana Prado',cargo:'Coordenadora pedagógica',vinc:'CLT',adm:'2026-09-10',deslig:'',sal:4200,ben:[{id:'E1_b0',nome:'Vale-refeição',valor:660},{id:'E1_b1',nome:'Vale-transporte',valor:220},{id:'E1_b2',nome:'Plano de saúde',valor:310}]},
+  {id:'E2',nome:'Roberto Alves',cargo:'Assistente administrativo',vinc:'CLT',adm:'2026-09-10',deslig:'',sal:2500,ben:[{id:'E2_b0',nome:'Vale-refeição',valor:660},{id:'E2_b1',nome:'Vale-transporte',valor:220}]},
+  {id:'E3',nome:'Fernanda Lima',cargo:'Auxiliar de serviços gerais',vinc:'CLT',adm:'2026-10-01',deslig:'',sal:1800,ben:[{id:'E3_b0',nome:'Vale-transporte',valor:180}]}];
+ const spk=(p,m,dia,full)=>{const pago={},arq=[];[{k:'sal',prev:p.sal,nm:'holerite'}].concat(p.ben.map((b,i)=>({k:b.id,prev:b.valor,nm:'beneficio'+(i+1)}))).forEach((i,ix)=>{if(!full&&ix>1)return;pago[i.k]={v:i.prev,d:m+'-'+dia};arq.push({n:'0045'+'12_'+dia+m.slice(5)+m.slice(0,4)+'0900_'+i.nm+'_'+p.nome.split(' ')[0].toLowerCase()+'.pdf',t:i.k})});return{pago,arq,obs:''}};
+ P.staffPC={};
+ P.equipe.forEach(p=>{['2026-09','2026-10'].forEach(m=>{if(p.adm.slice(0,7)<=m)P.staffPC[m+'|'+p.id]=spk(p,m,'05',true)});});
+ P.staffPC['2026-11|E1']=spk(P.equipe[0],'2026-11','05',false);
+ P.staffMes={'2026-09':{st:'aprovada',parecer:'Setembro conferido: salários e benefícios comprovados.'},'2026-10':{st:'em_analise',parecer:''},'2026-11':{st:'aberta',parecer:''}};
  return P;
 }
 const PROJ=[mkProjeto1()];
@@ -516,10 +528,10 @@ async function procArqs(files){
 }
 /* ---------- telas ---------- */
 const ETAPAS=[['elab','1 · Elaboração e recebimento'],['param','2 · Parametrização'],['exec','3 · Execução'],['enc','4 · Encerramento']];
-const TABN={resumo:'Resumo',cad:'Cadastro',plano:'Plano de trabalho',orc:'Orçamento',prest:'Prestação de contas',cal:'Calendário',alunos:'Atendidos',acomp:'Acompanhamento',aud:'Auditoria',hist:'Histórico',pat:'Patrimônio',prov:'Prestadores',sobre:'Sobre'};
+const TABN={resumo:'Resumo',cad:'Cadastro',plano:'Plano de trabalho',orc:'Orçamento',prest:'Prestação de contas',cal:'Calendário',alunos:'Atendidos',acomp:'Acompanhamento',aud:'Auditoria',hist:'Histórico',pat:'Patrimônio',prov:'Prestadores',staff:'Equipe (staff)',sobre:'Sobre'};
 function tabsDisp(){
  let t=Object.keys(TABN).filter(k=>k==='sobre'||has('ver_'+k));
- if(D.etapa==='elab'||D.etapa==='param'){const ok=D.etapa==='param'?['resumo','cad','plano','orc','hist','sobre']:['resumo','cad','sobre'];t=t.filter(x=>ok.includes(x));if(!t.length)t=['sobre']}
+ if(D.etapa==='elab'||D.etapa==='param'){const ok=D.etapa==='param'?['resumo','cad','plano','orc','staff','hist','sobre']:['resumo','cad','sobre'];t=t.filter(x=>ok.includes(x));if(!t.length)t=['sobre']}
  return t;
 }
 const pendProj=p=>p.lanc.filter(l=>l.st==='devolvido'||l.st==='lancado').length;
@@ -536,10 +548,10 @@ function vLista(){
 function vCab(){
  return'<div class="crumbs"><button class="crumb" data-a="lista">Projetos</button> / '+esc(D.nome)+' / '+TABN[S.tab]+'</div><h1>'+esc(D.nome)+'</h1><div class="muted small" style="margin-bottom:12px">'+esc(D.pat||'Parceiro a definir')+(D.instr?' · '+esc(D.instr):'')+(D.ini?' · período '+fd(D.ini)+' a '+fd(D.fim)+(D.exIni&&(D.exIni!==D.ini||D.exFim!==D.fim)?' · execução '+fd(D.exIni)+' a '+fd(D.exFim):''):'')+' · <b>versão v'+D.ver+'</b></div>';
 }
-const ICO={home:'M3 11l9-8 9 8M5 10v10h14V10',chart:'M4 20V10M10 20V4M16 20v-7M22 20H2',folder:'M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z',list:'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',wallet:'M3 7h16a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2zM3 7l3-3h11M16 14h2',receipt:'M9 11l3 3 8-8M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h9',cal:'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',users:'M16 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9.5 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7M21 20v-1a4 4 0 00-3-3.9M16 4.2a3.5 3.5 0 010 6.6',eye:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6',shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z',clock:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 7v5l3 2',box:'M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8',truck:'M2 6h11v10H2zM13 9h4l3 3v4h-7M6 19.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3M17 19.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3',info:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 11v6M12 7.5h.01',lock:'M5 11h14v10H5zM8 11V7a4 4 0 018 0v4'};
-const TABI={resumo:'chart',cad:'folder',plano:'list',orc:'wallet',prest:'receipt',cal:'cal',alunos:'users',acomp:'eye',aud:'shield',hist:'clock',pat:'box',prov:'truck',sobre:'info'};
+const ICO={home:'M3 11l9-8 9 8M5 10v10h14V10',chart:'M4 20V10M10 20V4M16 20v-7M22 20H2',folder:'M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z',list:'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',wallet:'M3 7h16a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2zM3 7l3-3h11M16 14h2',receipt:'M9 11l3 3 8-8M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h9',cal:'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',users:'M16 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9.5 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7M21 20v-1a4 4 0 00-3-3.9M16 4.2a3.5 3.5 0 010 6.6',eye:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6',shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z',clock:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 7v5l3 2',box:'M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8',truck:'M2 6h11v10H2zM13 9h4l3 3v4h-7M6 19.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3M17 19.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3',info:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 11v6M12 7.5h.01',id:'M3 5h18v14H3zM8 11a2 2 0 100-4 2 2 0 000 4M5.5 16c.6-2.2 4.4-2.2 5 0M14 9h4M14 13h4',lock:'M5 11h14v10H5zM8 11V7a4 4 0 018 0v4'};
+const TABI={resumo:'chart',cad:'folder',plano:'list',orc:'wallet',prest:'receipt',cal:'cal',alunos:'users',acomp:'eye',aud:'shield',hist:'clock',pat:'box',prov:'truck',staff:'id',sobre:'info'};
 const ic=n=>'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICO[n]+'"/></svg>';
-const TGRP=[['Gestão',['resumo','cad','plano','orc']],['Execução',['prest','cal','alunos','acomp','pat','prov']],['Controle',['aud','hist','sobre']]];
+const TGRP=[['Gestão',['resumo','cad','plano','orc']],['Execução',['prest','staff','cal','alunos','acomp','pat','prov']],['Controle',['aud','hist','sobre']]];
 function shell(){
  const u=userAtual(),ini=u.nome.split(' ').filter(Boolean).map(x=>x[0]).slice(0,2).join('').toUpperCase();
  $('#uav').textContent=ini;
@@ -567,7 +579,7 @@ function gBusca(q){
  if(has('acessos_admin')&&'acessos usuários perfis armazenamento'.includes(q))o.push('<button data-a="acessos"><b>Acessos e armazenamento</b><small>Administração</small></button>');
  r.innerHTML=o.join('')||'<div class="small muted" style="padding:10px 14px">Nada encontrado.</div>';r.style.display='block';
 }
-function badge(t){let n=0;if(t==='prest'&&has('lanc_analisa'))n=D.lanc.filter(l=>l.st==='lancado').length;if(t==='aud'&&has('aud_emite'))n=D.div.filter(d=>d.st==='respondida').length;if(t==='orc'&&has('rem_aprova'))n=D.rem.filter(r=>r.st==='pendente').length;if(t==='prest'&&has('just_aprova'))n=D.lanc.filter(l=>l.cot&&l.cot.dispensa&&l.cot.justSt==='pendente').length;return n?' <span class="pill warn">'+n+'</span>':''}
+function badge(t){let n=0;if(t==='prest'&&has('lanc_analisa'))n=D.lanc.filter(l=>l.st==='lancado').length;if(t==='aud'&&has('aud_emite'))n=D.div.filter(d=>d.st==='respondida').length;if(t==='staff'){const ms=Object.keys(D.staffMes||{});if(has('staff_analisa'))n+=ms.filter(x=>D.staffMes[x].st==='em_analise').length;if(has('staff_prest'))n+=ms.filter(x=>D.staffMes[x].st==='devolvida').length}if(t==='orc'&&has('rem_aprova'))n=D.rem.filter(r=>r.st==='pendente').length;if(t==='prest'&&has('just_aprova'))n=D.lanc.filter(l=>l.cot&&l.cot.dispensa&&l.cot.justSt==='pendente').length;return n?' <span class="pill warn">'+n+'</span>':''}
 function stepper(){const i=ETAPAS.findIndex(e=>e[0]===D.etapa);return'<div class="steps">'+ETAPAS.map((e,k)=>'<div class="step '+(k<i?'done':k===i?'cur':'')+'"><span class="no">'+(k<i?'✓':k+1)+'</span>'+e[1].slice(4)+'</div>').join('')+'</div>'}
 function conformidade(){
  const env=D.lanc.filter(l=>l.st!=='rascunho'&&l.st!=='devolvido'),fotoV=env.filter(l=>verbaDe(l.v).foto),rc=env.filter(reqCot),rs=realizadas(e=>e.tipo==='aula');
@@ -606,7 +618,7 @@ function vCad(){
  const sv=x.saldo;
  const blocos=[
  ['elab','Elaboração e recebimento do projeto','<p class="muted small" style="margin-top:0">Carregue o edital e os demais documentos da proposta e registre os dados do recebimento.</p><div>'+D.docs.map(d=>'<span class="chip">📎 '+esc(d.n)+' <small>('+esc(d.t)+')</small></span>').join('')+(D.docs.length?'':'<span class="muted small">Nenhum documento.</span>')+'</div>'+(ed?'<div class="row" style="margin-top:8px"><select id="dt" style="width:auto"><option>Edital</option><option>Proposta</option><option>Instrumento</option><option>Outro</option></select><input type="file" id="di" multiple style="flex:1;min-width:150px"></div>':'')+dadosRec],
- ['param','Parametrização','<div class="grid g2"><div><h3>Contas bancárias</h3>'+(D.contas.map(c=>'<div class="row small" style="margin-bottom:4px"><span'+(c.ativa===false?' style="text-decoration:line-through;opacity:.6"':'')+'>'+esc(c.nome)+(c.obs?' <span class="muted">· '+esc(c.obs)+'</span>':'')+'</span>'+(c.ativa===false?pill('Inativa'):'')+(ed?'<button class="btn sm" data-a="conta-edit" data-id="'+c.id+'">Editar</button><button class="btn sm" data-a="conta-tog" data-id="'+c.id+'">'+(c.ativa===false?'Reativar':'Inativar')+'</button>':'')+'</div>').join('')||'<span class="muted small">Nenhuma.</span>')+(ed?'<div><button class="btn sm" data-a="conta-nova" style="margin-top:6px">+ Conta</button></div>':'')+'</div><div><h3>Centros de custo</h3>'+(D.cc.map(c=>'<div class="row small" style="margin-bottom:4px"><span'+(c.ativa===false?' style="text-decoration:line-through;opacity:.6"':'')+'>'+esc(c.nome)+'</span>'+(c.ativa===false?pill('Inativo'):'')+(ed?'<button class="btn sm" data-a="cc-edit" data-id="'+c.id+'">Editar</button><button class="btn sm" data-a="cc-tog" data-id="'+c.id+'">'+(c.ativa===false?'Reativar':'Inativar')+'</button>':'')+'</div>').join('')||'<span class="muted small">Nenhum.</span>')+(ed?'<div><button class="btn sm" data-a="cc-novo" style="margin-top:6px">+ Centro de custo</button></div>':'')+'</div></div><h3 style="margin-top:12px">Critérios da auditoria e pesos</h3>'+D.criterios.map(c=>'<span class="chip">'+esc(c.nome)+' <b>'+c.peso+'%</b></span>').join('')+(ed?'<div><button class="btn sm" data-a="crit-form" style="margin-top:6px">Editar critérios e pesos</button></div>':'')+'<p class="small muted" style="margin-bottom:0">O plano de trabalho e o orçamento são montados nas abas <b>Plano de trabalho</b> e <b>Orçamento</b>.</p>'],
+ ['param','Parametrização','<div class="grid g2"><div><h3>Contas bancárias</h3>'+(D.contas.map(c=>'<div class="row small" style="margin-bottom:4px"><span'+(c.ativa===false?' style="text-decoration:line-through;opacity:.6"':'')+'>'+esc(c.nome)+(c.obs?' <span class="muted">· '+esc(c.obs)+'</span>':'')+'</span>'+(c.ativa===false?pill('Inativa'):'')+(ed?'<button class="btn sm" data-a="conta-edit" data-id="'+c.id+'">Editar</button><button class="btn sm" data-a="conta-tog" data-id="'+c.id+'">'+(c.ativa===false?'Reativar':'Inativar')+'</button>':'')+'</div>').join('')||'<span class="muted small">Nenhuma.</span>')+(ed?'<div><button class="btn sm" data-a="conta-nova" style="margin-top:6px">+ Conta</button></div>':'')+'</div><div><h3>Centros de custo</h3>'+(D.cc.map(c=>'<div class="row small" style="margin-bottom:4px"><span'+(c.ativa===false?' style="text-decoration:line-through;opacity:.6"':'')+'>'+esc(c.nome)+'</span>'+(c.ativa===false?pill('Inativo'):'')+(ed?'<button class="btn sm" data-a="cc-edit" data-id="'+c.id+'">Editar</button><button class="btn sm" data-a="cc-tog" data-id="'+c.id+'">'+(c.ativa===false?'Reativar':'Inativar')+'</button>':'')+'</div>').join('')||'<span class="muted small">Nenhum.</span>')+(ed?'<div><button class="btn sm" data-a="cc-novo" style="margin-top:6px">+ Centro de custo</button></div>':'')+'</div></div><h3 style="margin-top:12px">Critérios da auditoria e pesos</h3>'+D.criterios.map(c=>'<span class="chip">'+esc(c.nome)+' <b>'+c.peso+'%</b></span>').join('')+(ed?'<div><button class="btn sm" data-a="crit-form" style="margin-top:6px">Editar critérios e pesos</button></div>':'')+''+('<h3 style="margin-top:12px">Equipe (staff)</h3><div class="small">Vagas autorizadas: <b>'+(D.staffMax||0)+'</b> · ocupadas: <b>'+stOcup()+'</b>'+(ed?' <button class="btn sm" data-a="vagas-edit" style="margin-left:6px">Editar vagas</button>':'')+'</div>')+'<p class="small muted" style="margin-bottom:0">O plano de trabalho e o orçamento são montados nas abas <b>Plano de trabalho</b> e <b>Orçamento</b>.</p>'],
  ['exec','Execução','<div class="small">Período de execução: <b>'+(D.exIni?fd(D.exIni)+' a '+fd(D.exFim):'—')+'</b></div><p class="small muted">Lançamentos, calendário, alunos e prestações acontecem nas demais abas.</p>'+(e==='exec'&&pg?'<div class="row"><button class="btn sm d" data-a="enc-ini">Iniciar encerramento do projeto</button></div>':'')],
  ['enc','Encerramento','<p class="muted small" style="margin-top:0">Ao entrar nesta etapa, as etapas anteriores ficam bloqueadas (somente leitura). Anexe o relatório de conferência final e o termo de aprovação e apure o saldo final.</p>'+
   '<div class="grid g2"><div><h3>Relatório de conferência final</h3>'+(x.rel?'<span class="chip">📎 '+esc(x.rel.n)+'</span><div class="small muted">'+fd(x.rel.data)+' · '+esc(x.rel.quem)+'</div>':'<span class="muted small">Não anexado.</span>')+(edE?'<div style="margin-top:6px"><input type="file" id="enr"></div>':'')+'</div><div><h3>Termo de aprovação do projeto</h3>'+(x.termo?'<span class="chip">📎 '+esc(x.termo.n)+'</span><div class="small muted">'+fd(x.termo.data)+' · '+esc(x.termo.quem)+'</div>':'<span class="muted small">Não anexado.</span>')+(edE?'<div style="margin-top:6px"><input type="file" id="ent"></div>':'')+'</div></div>'+
@@ -771,7 +783,7 @@ function render0(){
  if(S.view==='lista'){a.innerHTML=vLista();return}
  if(S.view==='acessos'){a.innerHTML=vAcessos();return}
  const ts=tabsDisp();if(!ts.includes(S.tab))S.tab=ts[0];
- const v={resumo:vResumo,cad:vCad,plano:vPlano,orc:vOrc,prest:vPrest,cal:vCal,alunos:vAlunos,acomp:vAcomp,aud:vAud,hist:vHist,pat:vPat,prov:vProv,sobre:vSobre}[S.tab];
+ const v={resumo:vResumo,cad:vCad,plano:vPlano,orc:vOrc,prest:vPrest,cal:vCal,alunos:vAlunos,acomp:vAcomp,aud:vAud,hist:vHist,pat:vPat,prov:vProv,staff:vStaff,sobre:vSobre}[S.tab];
  a.innerHTML=S.rel?vCab()+vRel():vCab()+v();a.classList.toggle('wide',S.tab==='orc'&&!S.rel);document.body.classList.toggle('gxfull',!!(S.orcFull&&S.tab==='orc'&&!S.rel));
  const g=$('#gx');if(g){if(left!=null)g.scrollLeft=left;else{const th=g.querySelector('th[data-cur]');if(th)g.scrollLeft=Math.max(0,g.scrollLeft+th.getBoundingClientRect().left-g.getBoundingClientRect().left-g.querySelector('.fc').offsetWidth-4)}}
 }
@@ -1115,8 +1127,100 @@ function docsLer(){
  return l;
 }
 function ftSync(i,v){const s=$('#ft');if(!s)return;const ds=docsItem(i.id,v&&v.id),cur=s.value;s.innerHTML=ds.map(d=>'<option value="'+d.k+'">'+esc(d.nome)+(d.obrig?' (obrigatório)':' (opcional)')+'</option>').join('')||'<option value="nf">Documento</option>';if(cur&&s.querySelector('option[value="'+cur+'"]'))s.value=cur;fileList()}
+/* ===== Equipe (staff): vagas, pessoas e prestação mensal por pessoa ===== */
+const STM={aberta:['Em preparação',''],em_analise:['Em análise','warn'],aprovada:['Aprovada','ok'],devolvida:['Devolvida','bad']};
+const VINC=['CLT','PJ','Bolsista','Estagiário','Outro'];
+const stMesSt=m=>(D.staffMes&&D.staffMes[m]||{st:'aberta'}).st;
+const stOcup=()=>D.equipe.filter(p=>!p.deslig||p.deslig>HOJE).length;
+const stAtiva=(p,m)=>p.adm.slice(0,7)<=m&&(!p.deslig||p.deslig.slice(0,7)>=m);
+const stItens=p=>[{k:'sal',nome:'Salário',prev:p.sal}].concat((p.ben||[]).map(b=>({k:b.id,nome:b.nome,prev:b.valor})));
+const stReg=(pid,m)=>(D.staffPC&&D.staffPC[m+'|'+pid])||{pago:{},arq:[],obs:''};
+const stItOk=(r,k)=>{const x=r.pago[k];return!!(x&&x.v>0&&x.d&&r.arq.some(a=>a.t===k))};
+const stComp=(p,m)=>{const r=stReg(p.id,m),it=stItens(p),ok=it.filter(i=>stItOk(r,i.k)).length;return{ok,tot:it.length,full:ok===it.length}};
+const stMeses=()=>{if(!D.exIni)return[];const a=D.exIni.slice(0,7),h=HOJE.slice(0,7),f=D.exFim?D.exFim.slice(0,7):h;return mesesDe(a,h<f?h:f)};
+const stMv=v=>veTotal()?brl(v):MK;
+function stNomeItem(p,k){const i=stItens(p).find(x=>x.k===k);return i?i.nome:k}
+
+function vStaff(){
+ const m=stMeses().includes(S.mes)?S.mes:(stMeses().slice(-1)[0]||S.mes),ger=has('staff_gerir')&&!trancado(),oc=stOcup(),mx=D.staffMax||0,ms=stMeses(),sm=stMesSt(m);
+ const ativos=D.equipe.filter(p=>stAtiva(p,m));
+ const linhas=D.equipe.map(p=>{const des=p.deslig&&p.deslig<=HOJE;return'<tr'+(des?' style="opacity:.6"':'')+'><td><b>'+esc(p.nome)+'</b><div class="small muted">'+esc(p.cargo)+' · '+esc(p.vinc)+'</div></td><td>'+fd(p.adm)+(p.deslig?'<div class="small muted">até '+fd(p.deslig)+'</div>':'')+'</td><td class="n">'+stMv(p.sal)+'</td><td class="small">'+((p.ben||[]).map(b=>esc(b.nome)+' '+(veTotal()?brl(b.valor):'•••')).join('<br>')||'<span class="muted">—</span>')+'</td><td>'+pill(des?'Desligado':'Ativo',des?'':'ok')+'</td><td>'+(ger?'<button class="btn sm" data-a="st-edit" data-id="'+p.id+'">Editar</button>':'')+'</td></tr>'}).join('');
+ const pm=ativos.map(p=>{const c=stComp(p,m),r=stReg(p.id,m),sal=stItOk(r,'sal');return'<tr><td><b>'+esc(p.nome)+'</b><div class="small muted">'+esc(p.cargo)+'</div></td><td>'+(sal?'<span class="ok">✓ comprovado</span>':'<span class="bad">pendente</span>')+'</td><td>'+((p.ben||[]).length?(c.ok-(sal?1:0))+' de '+p.ben.length:'<span class="muted">—</span>')+'</td><td class="n">'+r.arq.length+'</td><td>'+(c.full?pill('Completo','ok'):pill(c.ok+' de '+c.tot+' itens','warn'))+'</td><td><button class="btn sm" data-a="stp-abrir" data-id="'+p.id+'">'+(has('staff_prest')&&['aberta','devolvida'].includes(sm)&&!travado(m)?'Comprovar':'Ver')+'</button></td></tr>'}).join('');
+ const todos=ativos.length>0&&ativos.every(p=>stComp(p,m).full);
+ let acao='';
+ if(has('staff_prest')&&['aberta','devolvida'].includes(sm)&&!travado(m))acao='<button class="btn p" data-a="st-enviar"'+(todos?'':' disabled')+'>Enviar prestação da equipe ao analista</button>'+(todos?'':'<span class="small bad">Comprove salário e benefícios de todas as pessoas antes de enviar.</span>');
+ else if(has('staff_analisa')&&sm==='em_analise')acao='<button class="btn p" data-a="st-aprovar">Aprovar</button><button class="btn d" data-a="st-devolver">Devolver para correção</button>';
+ else acao='<span class="small muted">'+(sm==='aprovada'?'Prestação da equipe aprovada.':'Sem ação disponível para o seu perfil neste estado.')+'</span>';
+ const par=D.staffMes&&D.staffMes[m]&&D.staffMes[m].parecer;
+ return'<div class="card"><div class="row"><h2 style="margin:0">Equipe (staff)</h2><span class="sp"></span>'+(ger?'<button class="btn p sm" data-a="st-nova">+ Pessoa</button>':'')+'</div><div class="grid g4" style="margin-top:8px"><div class="kpi"><div class="l">Vagas autorizadas</div><div class="v">'+mx+'</div></div><div class="kpi"><div class="l">Ocupadas</div><div class="v">'+oc+'</div></div><div class="kpi"><div class="l">Livres</div><div class="v" style="color:'+(mx-oc<0?'var(--bad)':'inherit')+'">'+(mx-oc)+'</div></div></div>'+(oc>mx?'<div class="alert bad">Há mais pessoas ativas do que vagas autorizadas.</div>':'')+(mx===0?'<div class="alert warn">Nenhuma vaga autorizada. A coordenação informa a quantidade no Cadastro, em Parametrização.</div>':'')+
+ '<div class="tw" style="margin-top:8px"><table><thead><tr><th>Pessoa</th><th>Admissão</th><th class="n">Salário previsto</th><th>Benefícios previstos</th><th>Situação</th><th></th></tr></thead><tbody>'+(linhas||'<tr><td colspan="6" class="muted">Nenhuma pessoa cadastrada.</td></tr>')+'</tbody></table></div></div>'+
+ '<div class="card"><div class="row"><h2 style="margin:0">Prestação de contas da equipe</h2><span class="sp"></span><label class="small" for="mes">Mês</label><select id="mes" data-a="mes" style="width:auto">'+ms.map(x=>'<option value="'+x+'"'+(x===m?' selected':'')+'>'+mesNome(x)+'</option>').join('')+'</select>'+pill(STM[sm][0],STM[sm][1])+(travado(m)?pill('🔒 Mês travado'):'')+'</div><p class="muted small">Para cada pessoa, demonstre o pagamento do salário e de cada benefício do mês e anexe os comprovantes (holerite, comprovante de pagamento, guias). Só depois que todos estiverem completos a prestação do mês pode ser enviada.</p>'+(par?'<div class="alert '+(sm==='devolvida'?'bad':'info')+'">Parecer do analista: '+esc(par)+'</div>':'')+
+ '<div class="tw"><table><thead><tr><th>Pessoa</th><th>Salário</th><th>Benefícios</th><th class="n">Anexos</th><th>Situação</th><th></th></tr></thead><tbody>'+(pm||'<tr><td colspan="6" class="muted">Nenhuma pessoa ativa neste mês.</td></tr>')+'</tbody></table></div><div class="row" style="margin-top:10px">'+acao+'</div></div>';
+}
+
+function stForm(id){
+ const p=id?D.equipe.find(x=>x.id===id):null;
+ modal(p?'Editar pessoa da equipe':'Nova pessoa da equipe','<div id="le"></div><label class="f" for="sn">Nome completo</label><input id="sn" value="'+esc(p?p.nome:'')+'"><div class="row"><div style="flex:2;min-width:160px"><label class="f" for="sc">Cargo / função</label><input id="sc" value="'+esc(p?p.cargo:'')+'"></div><div style="flex:1;min-width:120px"><label class="f" for="sv">Vínculo</label><select id="sv">'+VINC.map(v=>'<option'+(p&&p.vinc===v?' selected':'')+'>'+v+'</option>').join('')+'</select></div></div><div class="row"><div style="flex:1;min-width:130px"><label class="f" for="sa">Admissão</label><input type="date" id="sa" value="'+(p?p.adm:'')+'"></div>'+(p?'<div style="flex:1;min-width:130px"><label class="f" for="sd">Desligamento (se houver)</label><input type="date" id="sd" value="'+(p&&p.deslig||'')+'"></div>':'')+'<div style="flex:1;min-width:130px"><label class="f" for="ss">Salário mensal previsto (R$)</label><input type="number" step="0.01" min="0" id="ss" value="'+(p?p.sal:'')+'"></div></div><label class="f" for="sb">Benefícios mensais previstos (um por linha, “nome: valor”)</label><textarea id="sb" rows="4" placeholder="Vale-refeição: 660&#10;Vale-transporte: 220">'+esc(p?(p.ben||[]).map(b=>b.nome+': '+b.valor).join('\n'):'')+'</textarea><div class="small muted">Cada benefício listado vira um item a comprovar todo mês. Dados pessoais sensíveis (CPF, endereço) ficam fora deste cadastro.</div>','<button class="btn" data-a="fechar">Cancelar</button><button class="btn p" data-a="st-salvar" data-id="'+(id||'')+'">Salvar</button>');
+}
+
+function stpForm(pid,m){
+ const p=D.equipe.find(x=>x.id===pid),r=stReg(pid,m),sm=stMesSt(m),ed=has('staff_prest')&&['aberta','devolvida'].includes(sm)&&!travado(m);
+ M={sp:{pid,m},pago:JSON.parse(JSON.stringify(r.pago)),arq:r.arq.map(a=>Object.assign({},a)),ed};
+ const it=stItens(p);
+ const linha=i=>{const x=M.pago[i.k]||{};return'<tr><td><b>'+esc(i.nome)+'</b><div class="small muted">previsto '+stMv(i.prev)+'</div></td><td><input class="spx" type="number" step="0.01" min="0" id="spv_'+i.k+'" data-k="'+i.k+'" value="'+(x.v!=null?x.v:'')+'"'+(ed?'':' disabled')+' style="min-width:100px"></td><td><input class="spx" type="date" id="spd_'+i.k+'" data-k="'+i.k+'" value="'+(x.d||'')+'"'+(ed?'':' disabled')+'></td><td id="sst_'+i.k+'"></td></tr>'};
+ modal(p.nome+' · '+mesNome(m),'<div class="row">'+pill(STM[sm][0],STM[sm][1])+'<span class="small muted">'+esc(p.cargo)+'</span></div>'+(ed?'':'<div class="alert info">'+(travado(m)?'Mês travado: não aceita alterações.':sm==='em_analise'?'Prestação em análise: aguarde o parecer.':sm==='aprovada'?'Prestação aprovada.':'Seu perfil só consulta esta tela.')+'</div>')+'<div id="le"></div><div class="tw"><table><thead><tr><th>Item</th><th>Valor pago (R$)</th><th>Data do pagamento</th><th>Comprovante</th></tr></thead><tbody>'+it.map(linha).join('')+'</tbody></table></div>'+
+ (ed?'<label class="f">Anexar comprovantes</label><div class="row"><select id="sft" style="width:auto">'+it.map(i=>'<option value="'+i.k+'">'+esc(i.k==='sal'?'Salário — holerite / comprovante de pagamento':i.nome+' — comprovante')+'</option>').join('')+'</select><input type="file" id="sfi" multiple style="flex:1;min-width:150px"></div>':'')+'<div id="sfl" style="margin-top:6px"></div><label class="f" for="sob">Observação (obrigatória quando o valor pago difere do previsto)</label><textarea id="sob" rows="2"'+(ed?'':' disabled')+'>'+esc(r.obs||'')+'</textarea>',
+ '<button class="btn" data-a="fechar">'+(ed?'Cancelar':'Fechar')+'</button>'+(ed?'<button class="btn p" data-a="stp-salvar">Salvar prestação da pessoa</button>':''));
+ stLive();stFileList();
+}
+function stLeitura(){const o={};M.sp&&stItens(D.equipe.find(x=>x.id===M.sp.pid)).forEach(i=>{const v=$('#spv_'+i.k),d=$('#spd_'+i.k);o[i.k]={v:v?parseFloat(v.value)||0:0,d:d?d.value:''}});return o}
+function stLive(){
+ if(!M.sp)return;const p=D.equipe.find(x=>x.id===M.sp.pid),pg=stLeitura();
+ stItens(p).forEach(i=>{const x=pg[i.k],tem=M.arq.some(a=>a.t===i.k),el=$('#sst_'+i.k);if(!el)return;
+  const falta=[];if(!(x.v>0))falta.push('valor');if(!x.d)falta.push('data');if(!tem)falta.push('arquivo');
+  el.innerHTML=falta.length?'<span class="small bad">falta '+falta.join(', ')+'</span>':(Math.abs(x.v-i.prev)>0.004?'<span class="small" style="color:var(--warn)">✓ difere do previsto</span>':'<span class="ok">✓ comprovado</span>')});
+}
+function stFileList(){const el=$('#sfl');if(!el)return;const p=D.equipe.find(x=>x.id===M.sp.pid);el.innerHTML=M.arq.map((x,i)=>'<span class="chip">📎 '+esc(x.n)+' <small>('+esc(stNomeItem(p,x.t))+')</small>'+(M.ed?' <button class="crumb" data-a="srm-arq" data-id="'+i+'" aria-label="Remover">×</button>':'')+'</span>').join('')||'<span class="muted small">Nenhum comprovante anexado.</span>'}
+function stAnexa(t){const tp=$('#sft').value;[...t.files].forEach(f=>M.arq.push({n:FN(f),t:tp}));t.value='';stFileList();stLive()}
+
+const STAFF_ACT={
+ 'st-nova':()=>{if(stOcup()>=(D.staffMax||0)){modal('Sem vaga livre','<div class="alert bad">Todas as vagas autorizadas ('+(D.staffMax||0)+') estão ocupadas. Aumente a quantidade em Cadastro › Parametrização ou registre o desligamento de alguém.</div>','<button class="btn p" data-a="fechar">Entendi</button>');return}stForm()},
+ 'st-edit':id=>stForm(id),
+ 'st-salvar':id=>{
+  const n=$('#sn').value.trim(),c=$('#sc').value.trim(),a=$('#sa').value,s=parseFloat($('#ss').value),dd=$('#sd')?$('#sd').value:'',er=[];
+  if(!n)er.push('Informe o nome.');if(!c)er.push('Informe o cargo ou função.');if(!a)er.push('Informe a data de admissão.');if(!(s>0))er.push('Informe o salário mensal previsto.');
+  if(dd&&a&&dd<a)er.push('O desligamento não pode ser antes da admissão.');
+  const ben=[];$('#sb').value.split('\n').map(x=>x.trim()).filter(Boolean).forEach(l=>{const k=l.lastIndexOf(':');const nm=(k>0?l.slice(0,k):l).trim(),v=parseFloat((k>0?l.slice(k+1):'').replace(/\./g,'').replace(',','.'))||0;if(!nm||!(v>0))er.push('Benefício inválido: “'+l+'”. Use “nome: valor”.');else ben.push({nome:nm,valor:v})});
+  if(!id&&!er.length&&stOcup()>=(D.staffMax||0))er.push('Não há vaga livre.');
+  if(er.length){$('#le').innerHTML=errs(er);return}
+  const vinc=$('#sv').value;
+  if(id){const p=D.equipe.find(x=>x.id===id);const old=p.ben||[];
+   p.ben=ben.map((b,i)=>{const o=old.find(x=>x.nome.toLowerCase()===b.nome.toLowerCase());return{id:o?o.id:id+'_b'+Date.now()%100000+i,nome:b.nome,valor:b.valor}});
+   const ant=p.nome+' · '+p.cargo+' · '+brl(p.sal)+(p.deslig?' · desligado em '+fd(p.deslig):'');Object.assign(p,{nome:n,cargo:c,vinc,adm:a,sal:s,deslig:dd||''});
+   reg('Equipe','Pessoa da equipe alterada: '+n,ant,p.nome+' · '+p.cargo+' · '+brl(p.sal)+(p.deslig?' · desligado em '+fd(p.deslig):''))}
+  else{const nid='E'+(D.equipe.length+1)+Date.now()%1000;D.equipe.push({id:nid,nome:n,cargo:c,vinc,adm:a,deslig:'',sal:s,ben:ben.map((b,i)=>({id:nid+'_b'+i,nome:b.nome,valor:b.valor}))});reg('Equipe','Pessoa incluída na equipe: '+n+' ('+c+')')}
+  fechar();toast('Equipe atualizada.');render()},
+ 'stp-abrir':id=>stpForm(id,stMeses().includes(S.mes)?S.mes:stMeses().slice(-1)[0]),
+ 'srm-arq':id=>{M.arq.splice(+id,1);stFileList();stLive()},
+ 'stp-salvar':()=>{
+  const {pid,m}=M.sp,p=D.equipe.find(x=>x.id===pid),pg=stLeitura(),obs=$('#sob').value.trim(),er=[];
+  const dif=stItens(p).filter(i=>pg[i.k].v>0&&Math.abs(pg[i.k].v-i.prev)>0.004);
+  if(dif.length&&!obs)er.push('Informe na observação por que o valor pago difere do previsto ('+dif.map(i=>i.nome).join(', ')+').');
+  stItens(p).forEach(i=>{if(pg[i.k].d&&pg[i.k].d>HOJE)er.push(i.nome+': a data do pagamento não pode ser futura.')});
+  if(er.length){$('#le').innerHTML=errs(er);return}
+  D.staffPC=D.staffPC||{};D.staffPC[m+'|'+pid]={pago:pg,arq:M.arq,obs};
+  reg('Equipe','Comprovantes de '+p.nome+' em '+mesNome(m)+' atualizados ('+stComp(p,m).ok+' de '+stComp(p,m).tot+' itens comprovados)');
+  fechar();toast('Prestação de '+p.nome+' salva.');render()},
+ 'st-enviar':()=>{const m=S.mes;D.staffMes=D.staffMes||{};D.staffMes[m]={st:'em_analise',parecer:''};reg('Equipe','Prestação da equipe de '+mesNome(m)+' enviada ao analista');toast('Prestação da equipe enviada.');render()},
+ 'st-aprovar':()=>modal('Aprovar prestação da equipe — '+mesNome(S.mes),'<label class="f" for="pp">Parecer</label><textarea id="pp" rows="3"></textarea>','<button class="btn" data-a="fechar">Cancelar</button><button class="btn p" data-a="st-aprovar-ok">Aprovar</button>'),
+ 'st-aprovar-ok':()=>{const m=S.mes;D.staffMes[m]={st:'aprovada',parecer:$('#pp').value.trim()||'Conferida pelo analista.'};reg('Equipe','Prestação da equipe de '+mesNome(m)+' aprovada');fechar();toast('Prestação da equipe aprovada.');render()},
+ 'st-devolver':()=>modal('Devolver prestação da equipe — '+mesNome(S.mes),'<div id="le"></div><label class="f" for="pp">O que precisa ser corrigido</label><textarea id="pp" rows="3"></textarea>','<button class="btn" data-a="fechar">Cancelar</button><button class="btn d" data-a="st-devolver-ok">Devolver</button>'),
+ 'st-devolver-ok':()=>{const t=$('#pp').value.trim();if(!t){$('#le').innerHTML=errs(['Explique o que deve ser corrigido.']);return}const m=S.mes;D.staffMes[m]={st:'devolvida',parecer:t};reg('Equipe','Prestação da equipe de '+mesNome(m)+' devolvida: '+t);fechar();toast('Prestação devolvida para correção.');render()},
+ 'vagas-edit':()=>modal('Vagas da equipe (staff)','<div id="le"></div><label class="f" for="vg">Quantas pessoas podem ser contratadas para a equipe deste projeto?</label><input type="number" min="0" step="1" id="vg" value="'+(D.staffMax||0)+'"><div class="small muted">É o limite previsto no projeto. O sistema impede cadastrar mais pessoas ativas do que isso.</div>','<button class="btn" data-a="fechar">Cancelar</button><button class="btn p" data-a="vagas-salvar">Salvar</button>'),
+ 'vagas-salvar':()=>{const n=parseInt($('#vg').value,10);if(!(n>=0)){$('#le').innerHTML=errs(['Informe um número de vagas (0 ou mais).']);return}if(n<stOcup()){$('#le').innerHTML=errs(['Há '+stOcup()+' pessoas ativas: registre desligamentos antes de reduzir as vagas para '+n+'.']);return}const a=D.staffMax||0;D.staffMax=n;regCad('Vagas da equipe (staff) alteradas',String(a),String(n));fechar();toast('Vagas salvas.');render()}
+};
 /* ---------- ações ---------- */
-const STG={fi:'ft',di:'dt',pcf:'pct',pdi:'pdt',pfi:'pff'};
+const STG={sfi:'sft',fi:'ft',di:'dt',pcf:'pct',pdi:'pdt',pfi:'pff'};
 function stageShow(t){const old=document.getElementById('stg-'+t.id);if(old)old.remove();if(!t.files.length)return;const nm=[...t.files].map(f=>esc(f.name)).join(', ');const d=document.createElement('div');d.id='stg-'+t.id;d.className='row';d.style.cssText='margin-top:6px;gap:6px;align-items:center';d.innerHTML='<span class="small muted" style="flex:1">📎 '+t.files.length+' arquivo(s) selecionado(s): '+nm+'. Confira a categoria e clique em Enviar.</span><button class="btn p" type="button" data-a="arq-enviar" data-id="'+t.id+'">Enviar</button><button class="btn" type="button" data-a="arq-cancel" data-id="'+t.id+'">Cancelar</button>';t.closest('.row').insertAdjacentElement('afterend',d)}
 function lancSalvar(modo){
  const o={v:$('#lv1').value,i:$('#li').value,tipo:$('#lt').value,data:$('#ld').value,desc:$('#ls').value.trim(),forn:$('#lf').value,valor:parseFloat($('#lv').value)||0,conta:contaDe(itemDe($('#li').value),verbaDe($('#lv1').value)),cc:ccDe(itemDe($('#li').value),verbaDe($('#lv1').value))};
@@ -1152,6 +1256,7 @@ document.addEventListener('click',e=>{
  const a=t.dataset.a,id=t.dataset.id;
  if(a==='fechar-bg'){if(e.target===t)fechar();return}
  if(t.tagName==='SELECT'||(t.tagName==='INPUT'&&t.type!=='button'))return;
+ if(STAFF_ACT[a]){STAFF_ACT[a](id,t);return}
  switch(a){
   case'acessos':S.view='acessos';S.ax='usuarios';render();break;
   case'ax':S.ax=id;render();break;
@@ -1382,6 +1487,7 @@ document.addEventListener('change',e=>{if(e.target.type==='file'&&e.target.files
  if(t.id==='utd'){$('#upl').style.display=t.checked?'none':'';return}
  if(t.dataset&&t.dataset.a==='mes'){S.mes=t.value;render();return}
  if(t.dataset&&t.dataset.a==='presc'){setTimeout(evBtn,0);const i=M.pres.indexOf(t.dataset.id);if(t.checked&&i<0)M.pres.push(t.dataset.id);if(!t.checked&&i>=0)M.pres.splice(i,1);const on=t.checked;['n_','o_'].forEach(p=>{const el=$('#'+p+t.dataset.id);if(el)el.disabled=!on});return}
+ if(t.id==='sfi'){stAnexa(t);return}
  if(t.id==='fi'){const tp=$('#ft').value;[...t.files].forEach(f=>M.arq.push({n:FN(f),t:tp}));t.value='';fileList();return}
  if(t.id==='ef'){M.fotos=(D.cal.find(x=>x.id===M.id).fotos||0)+t.files.length;$('#efl').textContent=M.fotos+' foto(s) anexada(s)';evBtn();return}
  if(t.id==='edc'){[...t.files].forEach(x=>M.docNames.push(FN(x)));M.docs=M.docNames.length;$('#edl').textContent=M.docNames.join(', ');evBtn();return}
@@ -1406,7 +1512,7 @@ document.addEventListener('change',e=>{if(e.target.type==='file'&&e.target.files
  if(t.name==='io'||t.id==='itu'){inscForm.prev();return}
  if(t.id==='cdis'){$('#cjust').style.display=t.checked?'block':'none';return}
 });
-document.addEventListener('input',e=>{if(e.target.id==='gs'){gBusca(e.target.value);return}if(e.target.id==='dpa'){$('#dpv').textContent=pastaPrev(e.target.value);return}if(e.target.id==='tm')turmaForm.vg();if(e.target.id==='patq'){S.patQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#patq');if(n){n.focus();n.setSelectionRange(p,p)}return}if(e.target.id==='io')itemForm.calc();if(e.target.id==='acq'){S.acQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#acq');if(n){n.focus();n.setSelectionRange(p,p)}return}if(e.target.id==='lv')lancLive();if(e.target.id==='alq'){S.alunoQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#alq');if(n){n.focus();n.setSelectionRange(p,p)}}});
+document.addEventListener('input',e=>{if(e.target.id==='gs'){gBusca(e.target.value);return}if(e.target.classList&&e.target.classList.contains('spx')){stLive();return}if(e.target.id==='dpa'){$('#dpv').textContent=pastaPrev(e.target.value);return}if(e.target.id==='tm')turmaForm.vg();if(e.target.id==='patq'){S.patQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#patq');if(n){n.focus();n.setSelectionRange(p,p)}return}if(e.target.id==='io')itemForm.calc();if(e.target.id==='acq'){S.acQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#acq');if(n){n.focus();n.setSelectionRange(p,p)}return}if(e.target.id==='lv')lancLive();if(e.target.id==='alq'){S.alunoQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#alq');if(n){n.focus();n.setSelectionRange(p,p)}}});
 let pcSel=null;
 ['mouseup','keyup'].forEach(ev=>document.addEventListener(ev,e=>{if(e.target.closest&&e.target.closest('#pce')){const s=getSelection();if(s.rangeCount)pcSel=s.getRangeAt(0).cloneRange()}}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')fechar()});

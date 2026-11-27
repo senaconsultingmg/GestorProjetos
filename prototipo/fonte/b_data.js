@@ -20,22 +20,23 @@ const FUNC=[
 ['Plano de trabalho e orçamento',[['plano_edit','Cria ações e metas no plano de trabalho'],['orc_edit','Cria verbas de custos, itens de custos, tipos de receita e itens de receita; bloqueia itens'],['rem_aprova','Aprova remanejamento entre verbas'],['trava','Trava e destrava meses do orçamento'],['ver_valores','Vê valores (sem esta marca, os valores aparecem escondidos)']]],
 ['Lançamentos e prestação de contas',[['lanc','Lança despesas, solicita remanejamento e cadastra prestadores'],['rcb','Registra recebimentos de receitas'],['rend_info','Informa rendimentos financeiros'],['lanc_analisa','Analisa lançamentos e aprova a prestação de contas do mês'],['prest_enviar','Envia a prestação de contas do mês para análise'],['just_aprova','Aprova justificativas de falta de 3 orçamentos e avalia prestadores'],['pc_edit','Redige e envia a prestação de contas por ação'],['pc_ver','Abre a prestação de contas por ação (leitura e conferência)'],['rel_emite','Emite o relatório de execução das ações (por ação e período)']]],
 ['Calendário, alunos e acompanhamento',[['agenda','Cria e remarca aulas e eventos, registra presença e notas'],['aluno_gerir','Cadastra alunos, turmas, inscrições, saídas e transferências'],['dados_prot','Vê os dados protegidos dos alunos'],['log_acesso','Vê o registro de acessos aos dados protegidos'],['acomp_prof','Registra acompanhamento como professor'],['acomp_psi','Registra e vê o acompanhamento psicológico'],['acomp_ped','Registra acompanhamento como pedagogo'],['acomp_tudo','Vê todos os tipos de acompanhamento, inclusive o psicológico']]],
+['Equipe (staff)',[['staff_gerir','Cadastra, edita e desliga pessoas da equipe (staff)'],['staff_prest','Comprova salário e benefícios de cada pessoa por mês e envia a prestação da equipe'],['staff_analisa','Analisa, aprova ou devolve a prestação mensal da equipe']]],
 ['Auditoria e patrimônio',[['aud_emite','Emite relatórios de auditoria, abre divergências e as encerra'],['aud_resp','Responde divergências e registra correções'],['pat_edit','Cadastra e altera bens do patrimônio']]],
-['Abas que pode abrir',[['ver_resumo','Resumo'],['ver_cad','Cadastro'],['ver_plano','Plano de trabalho'],['ver_orc','Orçamento'],['ver_prest','Prestação de contas'],['ver_cal','Calendário'],['ver_alunos','Alunos'],['ver_acomp','Acompanhamento'],['ver_aud','Auditoria'],['ver_hist','Histórico'],['ver_pat','Patrimônio'],['ver_prov','Prestadores']]],
+['Abas que pode abrir',[['ver_resumo','Resumo'],['ver_cad','Cadastro'],['ver_plano','Plano de trabalho'],['ver_orc','Orçamento'],['ver_prest','Prestação de contas'],['ver_cal','Calendário'],['ver_alunos','Alunos'],['ver_acomp','Acompanhamento'],['ver_aud','Auditoria'],['ver_hist','Histórico'],['ver_pat','Patrimônio'],['ver_prov','Prestadores'],['ver_staff','Equipe (staff)']]],
 ['Administração',[['acessos_admin','Administra perfis e usuários (permissões)']]]];
-const VER=['ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_alunos','ver_acomp','ver_aud','ver_hist','ver_pat','ver_prov'];
-const COORDF=VER.concat(['proj_gerir','cad_edit','ver_inativos','plano_edit','orc_edit','trava','lanc','rcb','rend_info','agenda','aluno_gerir','acomp_tudo','dados_prot','log_acesso','aud_resp','pc_edit','pat_edit','ver_valores','just_aprova','rel_emite']);
+const VER=['ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_alunos','ver_acomp','ver_aud','ver_hist','ver_pat','ver_prov','ver_staff'];
+const COORDF=VER.concat(['proj_gerir','cad_edit','ver_inativos','plano_edit','orc_edit','trava','lanc','rcb','rend_info','agenda','aluno_gerir','acomp_tudo','dados_prot','log_acesso','aud_resp','pc_edit','pat_edit','ver_valores','just_aprova','rel_emite','staff_gerir','staff_prest']);
 const PERFIS=[
 {id:'coord',nome:'Coordenador de Projetos',funcs:COORDF},
-{id:'gestor',nome:'Gestor do contrato',funcs:VER.concat(['plano_edit','rem_aprova','just_aprova','lanc','rcb','agenda','aluno_gerir','aud_resp','pc_edit','pat_edit','dados_prot','ver_valores','rel_emite'])},
-{id:'assist',nome:'Assistente de prestação de contas',funcs:['ver_resumo','ver_plano','ver_orc','ver_prest','ver_pat','ver_prov','ver_cal','lanc','rcb','prest_enviar','aud_resp','pc_edit','pat_edit','ver_valores']},
-{id:'analista',nome:'Analista de prestação de contas',funcs:['ver_resumo','ver_plano','ver_orc','ver_prest','ver_aud','ver_hist','ver_pat','ver_prov','lanc_analisa','trava','aud_resp','pc_ver','ver_valores','rel_emite']},
-{id:'auditor',nome:'Auditor',funcs:['ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_alunos','ver_aud','ver_hist','ver_pat','ver_prov','aud_emite','log_acesso','pc_ver','ver_valores','rel_emite']},
+{id:'gestor',nome:'Gestor do contrato',funcs:VER.concat(['plano_edit','rem_aprova','just_aprova','lanc','rcb','agenda','aluno_gerir','aud_resp','pc_edit','pat_edit','dados_prot','ver_valores','rel_emite','staff_gerir'])},
+{id:'assist',nome:'Assistente de prestação de contas',funcs:['ver_staff','staff_prest','ver_resumo','ver_plano','ver_orc','ver_prest','ver_pat','ver_prov','ver_cal','lanc','rcb','prest_enviar','aud_resp','pc_edit','pat_edit','ver_valores']},
+{id:'analista',nome:'Analista de prestação de contas',funcs:['ver_staff','staff_analisa','ver_resumo','ver_plano','ver_orc','ver_prest','ver_aud','ver_hist','ver_pat','ver_prov','lanc_analisa','trava','aud_resp','pc_ver','ver_valores','rel_emite']},
+{id:'auditor',nome:'Auditor',funcs:['ver_staff','ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_alunos','ver_aud','ver_hist','ver_pat','ver_prov','aud_emite','log_acesso','pc_ver','ver_valores','rel_emite']},
 {id:'prof',nome:'Professor',funcs:['ver_plano','ver_cal','ver_alunos','ver_acomp','agenda','acomp_prof']},
 {id:'psi',nome:'Psicólogo',funcs:['ver_plano','ver_cal','ver_alunos','ver_acomp','acomp_psi']},
 {id:'ped',nome:'Pedagoga',funcs:['ver_plano','ver_cal','ver_alunos','ver_acomp','acomp_ped']},
 {id:'fin',nome:'Financeiro',funcs:['ver_orc','ver_hist','rend_info','ver_valores']},
-{id:'dir',nome:'Diretoria',funcs:['ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_aud','ver_hist','ver_pat','ver_inativos','ver_valores','rel_emite']},
+{id:'dir',nome:'Diretoria',funcs:['ver_staff','ver_resumo','ver_cad','ver_plano','ver_orc','ver_prest','ver_cal','ver_aud','ver_hist','ver_pat','ver_inativos','ver_valores','rel_emite']},
 {id:'adm',nome:'Administrador',funcs:COORDF.concat(['acessos_admin'])}];
 const USUARIOS=Object.keys(ROLES).map(r=>({id:r,nome:ROLES[r][0],email:ROLES[r][0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ /g,'.')+'@instituto.org.br',perfil:r,projetos:'todos',ativo:true}));
 const ACLOG=[];
@@ -52,7 +53,7 @@ const SENHA='1234';
 const nomes=['Davi Souza','Miguel Santos','Arthur Oliveira','Heitor Lima','Gabriel Pereira','Samuel Costa','Lucas Ribeiro','Matheus Almeida','Pedro Carvalho','Enzo Gomes','Rafael Martins','Bernardo Rocha','Nicolas Barbosa','Guilherme Araújo','Felipe Nunes','João Vitor Dias','Caio Teixeira','Bruno Moreira','Thiago Cardoso','Vinícius Freitas','Kauã Ramos','Ryan Mendes','Théo Cavalcanti','Isaac Monteiro','Ana Clara Lopes','Maria Eduarda Pinto','Larissa Campos','Beatriz Farias'];
 const ruas=['Rua das Palmeiras','Rua Sete de Setembro','Av. Esperança','Rua do Campo','Travessa da Paz'];
 const CRIT0=()=>[{id:'acoes',nome:'Cumprimento das ações e metas',peso:30},{id:'orc',nome:'Execução do orçamento',peso:20},{id:'prest',nome:'Qualidade das prestações de contas',peso:20},{id:'alunos',nome:'Assiduidade e participação dos alunos',peso:20},{id:'prov',nome:'Qualidade dos prestadores',peso:10}];
-function mkVazio(nome){return{ativo:true,enc:null,bens:[],criterios:CRIT0(),id:'P'+Date.now()%100000,nome,etapa:'elab',pat:'',instr:'',codigos:[],tipo:'',respElab:'',docs:[],contas:[],cc:[],acoes:[],verbas:[],lanc:[],prest:{},cal:[],alunos:[],turmas:[],acomp:[],prov:[],div:[],nc:[],aud:[],minCot:500,rem:[],ini:'',fim:'',exIni:'',exFim:'',ver:1,vers:[{v:1,q:HOJE,quem:'Sistema',desc:'Versão inicial do projeto'}],log:[],trava:{},receitas:[],rcb:[],objetivo:'',
+function mkVazio(nome){return{ativo:true,enc:null,bens:[],criterios:CRIT0(),id:'P'+Date.now()%100000,nome,etapa:'elab',pat:'',instr:'',codigos:[],tipo:'',respElab:'',docs:[],contas:[],cc:[],acoes:[],verbas:[],lanc:[],prest:{},cal:[],alunos:[],turmas:[],acomp:[],prov:[],div:[],nc:[],aud:[],minCot:500,rem:[],staffMax:0,equipe:[],staffPC:{},staffMes:{},ini:'',fim:'',exIni:'',exFim:'',ver:1,vers:[{v:1,q:HOJE,quem:'Sistema',desc:'Versão inicial do projeto'}],log:[],trava:{},receitas:[],rcb:[],objetivo:'',
  vis:visPadrao([]),dadosAcesso:['coord','gestor'],logAcesso:[]}}
 function visPadrao(verbas){const v={};['coord','gestor','assist','analista','auditor','prof','psi','ped','fin','dir','adm'].forEach(r=>{const all=['coord','gestor','analista','auditor','fin','dir','adm'].includes(r),ver=all||r==='assist';v[r]={total:all,v:Object.fromEntries(verbas.map(x=>[x.id,ver])),};});return v}
 function mkProjeto1(){
@@ -162,6 +163,17 @@ function mkProjeto1(){
  {id:'PT2',desc:'Armário de aço para almoxarifado',local:'Salão da Associação',status:'Em estoque',num:'PAT-004513',lanc:'',dataAq:'2026-10-03',fotos:[{fase:'Aquisição',n:'armario.jpg'}],docs:[{t:'NF',n:'nf_armario.pdf'},{t:'Manual',n:'manual_armario.pdf'}],rem:null,hist:[{q:'2026-10-03',quem:'Carlos Dias (assistente)',campo:'Cadastro',ant:'—',dep:'Bem cadastrado'}]},
  {id:'PT3',desc:'Projetor multimídia',local:'Removido — devolvido ao parceiro',status:'Removido',num:'PAT-004498',lanc:'',dataAq:'2026-09-12',fotos:[{fase:'Aquisição',n:'projetor.jpg'},{fase:'Remoção',n:'projetor_devolucao.jpg'}],docs:[{t:'NF',n:'nf_projetor.pdf'}],rem:{data:'2026-11-08',destino:'Instituto Bola Cidadã (sede)',motivo:'Defeito de fábrica; trocado pelo parceiro.'},hist:[{q:'2026-09-12',quem:'Carlos Dias (assistente)',campo:'Cadastro',ant:'—',dep:'Bem cadastrado'},{q:'2026-11-08',quem:'Marcos Lima (gestor)',campo:'Status',ant:'Em uso',dep:'Removido → Instituto Bola Cidadã (sede), 08/11/2026'}]}];
 
+
+ P.staffMax=4;
+ P.equipe=[
+  {id:'E1',nome:'Juliana Prado',cargo:'Coordenadora pedagógica',vinc:'CLT',adm:'2026-09-10',deslig:'',sal:4200,ben:[{id:'E1_b0',nome:'Vale-refeição',valor:660},{id:'E1_b1',nome:'Vale-transporte',valor:220},{id:'E1_b2',nome:'Plano de saúde',valor:310}]},
+  {id:'E2',nome:'Roberto Alves',cargo:'Assistente administrativo',vinc:'CLT',adm:'2026-09-10',deslig:'',sal:2500,ben:[{id:'E2_b0',nome:'Vale-refeição',valor:660},{id:'E2_b1',nome:'Vale-transporte',valor:220}]},
+  {id:'E3',nome:'Fernanda Lima',cargo:'Auxiliar de serviços gerais',vinc:'CLT',adm:'2026-10-01',deslig:'',sal:1800,ben:[{id:'E3_b0',nome:'Vale-transporte',valor:180}]}];
+ const spk=(p,m,dia,full)=>{const pago={},arq=[];[{k:'sal',prev:p.sal,nm:'holerite'}].concat(p.ben.map((b,i)=>({k:b.id,prev:b.valor,nm:'beneficio'+(i+1)}))).forEach((i,ix)=>{if(!full&&ix>1)return;pago[i.k]={v:i.prev,d:m+'-'+dia};arq.push({n:'0045'+'12_'+dia+m.slice(5)+m.slice(0,4)+'0900_'+i.nm+'_'+p.nome.split(' ')[0].toLowerCase()+'.pdf',t:i.k})});return{pago,arq,obs:''}};
+ P.staffPC={};
+ P.equipe.forEach(p=>{['2026-09','2026-10'].forEach(m=>{if(p.adm.slice(0,7)<=m)P.staffPC[m+'|'+p.id]=spk(p,m,'05',true)});});
+ P.staffPC['2026-11|E1']=spk(P.equipe[0],'2026-11','05',false);
+ P.staffMes={'2026-09':{st:'aprovada',parecer:'Setembro conferido: salários e benefícios comprovados.'},'2026-10':{st:'em_analise',parecer:''},'2026-11':{st:'aberta',parecer:''}};
  return P;
 }
 const PROJ=[mkProjeto1()];

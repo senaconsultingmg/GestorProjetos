@@ -19,6 +19,7 @@ Registro de por que o sistema é como é. Complementa `ESPECIFICACAO.md`.
 - **Anexar:** escolher arquivo → conferir categoria → clicar em Enviar. Arquivo escolhido e não enviado impede salvar.
 - **Atendidos:** categoria aluno/atendido, foto, documentos em área restrita, matrícula em várias ações; ação genérica com texto rico e anexos.
 - **Acesso:** funções (catálogo) → perfis → usuários, com escopo por projeto; relatório emitido por quem tem a função `rel_emite`.
+- **Equipe (staff):** vagas autorizadas no cadastro; prestação mensal por pessoa com salário e cada benefício (valor, data, comprovante); mês só é enviado com todos completos; analista aprova ou devolve.
 - **Armazenamento:** vários destinos (Storage, Drive, bucket), um principal e cópias, só ativados após teste de conexão; modelo de pastas com {processo},{ano},{mes},{ano-mes},{verba},{item},{acao}.
 - **Layout:** barra lateral escura, topo com busca, trilha de navegação, etapas em círculos, painel de resumo (inspirado no Portal Tripolo).
 
@@ -33,4 +34,5 @@ Registro de por que o sistema é como é. Complementa `ESPECIFICACAO.md`.
 - Integração RM/Fluig (ver seção 10 da especificação).
 
 ## Em aberto
+Equipe (staff): confirmar com o dono do produto se (a) o custo da equipe deve se ligar a uma verba do orçamento e gerar lançamento automático, (b) há outros comprovantes mensais exigidos (FGTS, INSS, 13º, férias, rescisão), (c) se o parceiro exige CPF e dados bancários da pessoa.
 Itens 5, 6, 7, 8, 10 e 11 da seção 9 da especificação. Além disso: como o Portal Processos modela empresas, grupos, setores e papéis (precisa ver o esquema do banco do portal para fechar a integração).

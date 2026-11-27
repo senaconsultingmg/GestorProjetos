@@ -1,5 +1,5 @@
 /* ---------- ações ---------- */
-const STG={fi:'ft',di:'dt',pcf:'pct',pdi:'pdt',pfi:'pff'};
+const STG={sfi:'sft',fi:'ft',di:'dt',pcf:'pct',pdi:'pdt',pfi:'pff'};
 function stageShow(t){const old=document.getElementById('stg-'+t.id);if(old)old.remove();if(!t.files.length)return;const nm=[...t.files].map(f=>esc(f.name)).join(', ');const d=document.createElement('div');d.id='stg-'+t.id;d.className='row';d.style.cssText='margin-top:6px;gap:6px;align-items:center';d.innerHTML='<span class="small muted" style="flex:1">📎 '+t.files.length+' arquivo(s) selecionado(s): '+nm+'. Confira a categoria e clique em Enviar.</span><button class="btn p" type="button" data-a="arq-enviar" data-id="'+t.id+'">Enviar</button><button class="btn" type="button" data-a="arq-cancel" data-id="'+t.id+'">Cancelar</button>';t.closest('.row').insertAdjacentElement('afterend',d)}
 function lancSalvar(modo){
  const o={v:$('#lv1').value,i:$('#li').value,tipo:$('#lt').value,data:$('#ld').value,desc:$('#ls').value.trim(),forn:$('#lf').value,valor:parseFloat($('#lv').value)||0,conta:contaDe(itemDe($('#li').value),verbaDe($('#lv1').value)),cc:ccDe(itemDe($('#li').value),verbaDe($('#lv1').value))};
@@ -35,6 +35,7 @@ document.addEventListener('click',e=>{
  const a=t.dataset.a,id=t.dataset.id;
  if(a==='fechar-bg'){if(e.target===t)fechar();return}
  if(t.tagName==='SELECT'||(t.tagName==='INPUT'&&t.type!=='button'))return;
+ if(STAFF_ACT[a]){STAFF_ACT[a](id,t);return}
  switch(a){
   case'acessos':S.view='acessos';S.ax='usuarios';render();break;
   case'ax':S.ax=id;render();break;
@@ -265,6 +266,7 @@ document.addEventListener('change',e=>{if(e.target.type==='file'&&e.target.files
  if(t.id==='utd'){$('#upl').style.display=t.checked?'none':'';return}
  if(t.dataset&&t.dataset.a==='mes'){S.mes=t.value;render();return}
  if(t.dataset&&t.dataset.a==='presc'){setTimeout(evBtn,0);const i=M.pres.indexOf(t.dataset.id);if(t.checked&&i<0)M.pres.push(t.dataset.id);if(!t.checked&&i>=0)M.pres.splice(i,1);const on=t.checked;['n_','o_'].forEach(p=>{const el=$('#'+p+t.dataset.id);if(el)el.disabled=!on});return}
+ if(t.id==='sfi'){stAnexa(t);return}
  if(t.id==='fi'){const tp=$('#ft').value;[...t.files].forEach(f=>M.arq.push({n:FN(f),t:tp}));t.value='';fileList();return}
  if(t.id==='ef'){M.fotos=(D.cal.find(x=>x.id===M.id).fotos||0)+t.files.length;$('#efl').textContent=M.fotos+' foto(s) anexada(s)';evBtn();return}
  if(t.id==='edc'){[...t.files].forEach(x=>M.docNames.push(FN(x)));M.docs=M.docNames.length;$('#edl').textContent=M.docNames.join(', ');evBtn();return}
@@ -289,7 +291,7 @@ document.addEventListener('change',e=>{if(e.target.type==='file'&&e.target.files
  if(t.name==='io'||t.id==='itu'){inscForm.prev();return}
  if(t.id==='cdis'){$('#cjust').style.display=t.checked?'block':'none';return}
 });
-document.addEventListener('input',e=>{if(e.target.id==='gs'){gBusca(e.target.value);return}if(e.target.id==='dpa'){$('#dpv').textContent=pastaPrev(e.target.value);return}if(e.target.id==='tm')turmaForm.vg();if(e.target.id==='patq'){S.patQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#patq');if(n){n.focus();n.setSelectionRange(p,p)}return}if(e.target.id==='io')itemForm.calc();if(e.target.id==='acq'){S.acQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#acq');if(n){n.focus();n.setSelectionRange(p,p)}return}if(e.target.id==='lv')lancLive();if(e.target.id==='alq'){S.alunoQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#alq');if(n){n.focus();n.setSelectionRange(p,p)}}});
+document.addEventListener('input',e=>{if(e.target.id==='gs'){gBusca(e.target.value);return}if(e.target.classList&&e.target.classList.contains('spx')){stLive();return}if(e.target.id==='dpa'){$('#dpv').textContent=pastaPrev(e.target.value);return}if(e.target.id==='tm')turmaForm.vg();if(e.target.id==='patq'){S.patQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#patq');if(n){n.focus();n.setSelectionRange(p,p)}return}if(e.target.id==='io')itemForm.calc();if(e.target.id==='acq'){S.acQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#acq');if(n){n.focus();n.setSelectionRange(p,p)}return}if(e.target.id==='lv')lancLive();if(e.target.id==='alq'){S.alunoQ=e.target.value;const p=e.target.selectionStart;render();const n=$('#alq');if(n){n.focus();n.setSelectionRange(p,p)}}});
 let pcSel=null;
 ['mouseup','keyup'].forEach(ev=>document.addEventListener(ev,e=>{if(e.target.closest&&e.target.closest('#pce')){const s=getSelection();if(s.rangeCount)pcSel=s.getRangeAt(0).cloneRange()}}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')fechar()});

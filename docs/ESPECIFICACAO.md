@@ -91,6 +91,9 @@ O acesso é definido por **funções**. O administrador cria um perfil (cargo), 
 | Lançamentos e prestação | `pc_edit` | Redigir e enviar a prestação por ação |
 | Lançamentos e prestação | `pc_ver` | Ver a prestação por ação |
 | Lançamentos e prestação | `rel_emite` | Emitir o relatório de execução das ações |
+| Equipe (staff) | `staff_gerir` | Cadastrar, editar e desligar pessoas da equipe |
+| Equipe (staff) | `staff_prest` | Comprovar salário e benefícios por pessoa e enviar a prestação mensal da equipe |
+| Equipe (staff) | `staff_analisa` | Analisar, aprovar ou devolver a prestação mensal da equipe |
 | Calendário e atendidos | `agenda` | Criar e remarcar aulas e eventos; presença e notas |
 | Calendário e atendidos | `aluno_gerir` | Atendidos, turmas, inscrições, saídas e transferências |
 | Calendário e atendidos | `dados_prot` | Ver dados protegidos dos atendidos |
@@ -99,7 +102,7 @@ O acesso é definido por **funções**. O administrador cria um perfil (cargo), 
 | Auditoria e patrimônio | `aud_emite` | Emitir relatórios, abrir e encerrar divergências |
 | Auditoria e patrimônio | `aud_resp` | Responder divergências e registrar correções |
 | Auditoria e patrimônio | `pat_edit` | Cadastrar e alterar bens |
-| Abas | `ver_resumo`, `ver_cad`, `ver_plano`, `ver_orc`, `ver_prest`, `ver_cal`, `ver_alunos`, `ver_acomp`, `ver_aud`, `ver_hist`, `ver_pat`, `ver_prov` | Abrir cada aba (a aba `ver_alunos` chama-se Atendidos) |
+| Abas | `ver_resumo`, `ver_cad`, `ver_plano`, `ver_orc`, `ver_prest`, `ver_cal`, `ver_alunos`, `ver_acomp`, `ver_aud`, `ver_hist`, `ver_pat`, `ver_prov`, `ver_staff` | Abrir cada aba (a aba `ver_alunos` chama-se Atendidos) |
 | Administração | `acessos_admin` | Administrar perfis, usuários e destinos de armazenamento |
 
 **Perfis iniciais** (ponto de partida; o administrador ajusta): Coordenador de Projetos, Gestor do contrato, Assistente e Analista de prestação de contas, Auditor, Professor, Psicólogo, Pedagoga, Financeiro, Diretoria e Administrador.
@@ -157,6 +160,16 @@ Cada módulo abaixo corresponde a uma aba do protótipo. As regras são as valid
 - **Dados protegidos** (documentos, endereço, responsáveis, saúde) só com `dados_prot`; cada consulta grava no registro de acessos.
 - **Acompanhamento** por professor, psicólogo e pedagogo, cada tipo com sua permissão. O psicológico só é visto por quem tem `acomp_psi` ou `acomp_tudo`.
 
+### 4.6a Equipe (staff)
+
+- **Vagas no cadastro:** em Parametrização, a coordenação informa quantas pessoas podem ser contratadas para a equipe do projeto. O sistema não deixa cadastrar mais pessoas ativas do que as vagas, nem reduzir as vagas abaixo do número de ativos.
+- **Gestão da equipe:** aba Equipe (staff). Cada pessoa tem nome, cargo, vínculo (CLT, PJ, bolsista, estagiário, outro), admissão, desligamento, salário mensal previsto e a lista de benefícios mensais previstos (vale-refeição, transporte, plano de saúde etc.). Desligar libera a vaga a partir da data; a pessoa continua aparecendo nos meses em que esteve ativa.
+- **Prestação mensal por pessoa:** para cada mês e cada pessoa ativa, demonstra-se o pagamento do salário e de **cada benefício**: valor pago, data do pagamento e comprovante anexado (holerite, comprovante de pagamento, guias). Um item só conta como comprovado quando tem valor, data e ao menos um arquivo. Se o valor pago difere do previsto, a observação é obrigatória. Data de pagamento futura não é aceita.
+- **Envio do mês:** só é possível quando todas as pessoas ativas do mês estão completas. O analista (`staff_analisa`) aprova com parecer ou devolve com o que deve ser corrigido; o mês devolvido volta a ser editável. Mês travado ou em análise não aceita alteração.
+- **Anexos:** seguem o mesmo fluxo (escolher, conferir a categoria, clicar em Enviar), o mesmo nome padrão e as mesmas regras de armazenamento da seção 4.8.
+- **Privacidade:** os salários só aparecem para quem tem `ver_valores`. O cadastro não guarda CPF nem endereço; se o parceiro exigir, esses dados entram em área restrita como os dos atendidos.
+- Todas as ações vão para o histórico do projeto.
+
 ### 4.7 Auditoria, patrimônio e encerramento
 
 - **Auditoria:** o auditor emite relatórios segundo os critérios do cadastro, abre divergências e as encerra; o responsável responde e registra a correção.
@@ -197,6 +210,10 @@ Tabelas relacionais no PostgreSQL, com chave primária `id` (uuid), `criado_em`,
 | Projeto | `projetos` | nome, parceiro, instrumento, nº do processo, início, fim, etapa, ativo, valores totais | — |
 | Projeto | `projeto_historico` | tipo, de, para, justificativa | projetos |
 | Projeto | `projeto_codigos`, `projeto_documentos` | rótulo, valor; arquivo | projetos; `arquivos` |
+| Equipe | `equipe` | nome, cargo, vínculo, admissão, desligamento, salário previsto | projetos |
+| Equipe | `equipe_beneficios` | nome, valor mensal previsto | equipe |
+| Equipe | `equipe_prestacao` | mês, item (salário ou benefício), valor pago, data do pagamento, observação | equipe; `arquivos` (comprovantes) |
+| Equipe | `equipe_mes` | mês, situação (em preparação, em análise, aprovada, devolvida), parecer | projetos |
 | Projeto | `contas` | banco, agência, conta, observações, ativa | projetos |
 | Projeto | `centros_custo` | codigo, descricao, ativo | projetos |
 | Plano | `acoes` | codigo, nome, tipo | projetos |
